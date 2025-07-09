@@ -1,0 +1,23 @@
+
+<svg width="72" height="72" viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="72" height="72" rx="10.799999999999999" fill="url(#grad1)"/>
+  
+  <!-- Document icon -->
+  <rect x="18" y="14.4" width="36" height="43.199999999999996" rx="3.6" fill="white" opacity="0.9"/>
+  
+  <!-- Text lines -->
+  <rect x="21.599999999999998" y="25.2" width="28.8" height="2.16" rx="1.08" fill="#1e40af"/>
+  <rect x="21.599999999999998" y="32.4" width="21.599999999999998" height="2.16" rx="1.08" fill="#1e40af"/>
+  <rect x="21.599999999999998" y="39.6" width="25.2" height="2.16" rx="1.08" fill="#1e40af"/>
+  
+  <!-- Star (for government/official symbol) -->
+  <polygon points="36,46.800000000000004 37.44,50.4 41.04,50.4 38.160000000000004,52.56 39.6,56.160000000000004 36,54 32.4,56.160000000000004 33.839999999999996,52.56 30.96,50.4 34.56,50.4" fill="#fbbf24"/>
+</svg>
