@@ -1,10 +1,8 @@
-# Sarkari Result Clone
 
-A complete React.js clone of the Sarkari Result website (https://thesarkariresult.info/), featuring all the main sections and functionality with a modern, responsive design.
 
-## 🚀 Features
 
-- **Complete Website Clone**: Pixel-perfect recreation of the original Sarkari Result website
+
+
 - **Responsive Design**: Fully responsive layout that works on all devices
 - **Modern React Architecture**: Built with functional components, hooks, and JSX format
 - **React Router**: Navigation between different sections
