@@ -9,8 +9,8 @@ const SEOAnalytics = () => {
     // Track page views for SEO analytics
     const trackPageView = () => {
       // Google Analytics 4 tracking
-      if (typeof gtag !== 'undefined') {
-        gtag('config', 'GA_MEASUREMENT_ID', {
+      if (typeof window.gtag !== 'undefined') {
+        window.gtag('config', 'GA_MEASUREMENT_ID', {
           page_title: document.title,
           page_location: window.location.href,
           custom_map: {
@@ -19,7 +19,7 @@ const SEOAnalytics = () => {
           }
         });
 
-        gtag('event', 'page_view', {
+        window.gtag('event', 'page_view', {
           page_title: document.title,
           page_location: window.location.href,
           page_path: location.pathname
