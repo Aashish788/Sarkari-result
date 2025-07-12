@@ -1,1 +1,10 @@
-google.com, pub-5242141609668921, DIRECT, f08c47fec0942fa0
+# ads.txt file for thesarkariresult.info
+# This file helps prevent counterfeit inventory from being sold on unauthorized sites
+
+# Google AdSense
+google.com, pub-XXXXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+
+# Replace pub-XXXXXXXXXXXXXXXXXX with your actual Google AdSense Publisher ID
+# Add other ad networks as needed
+
+# Format: domain, publisher_id, relationship, tag_id

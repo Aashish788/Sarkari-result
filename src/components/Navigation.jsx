@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import SearchBox from './SearchBox';
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -58,27 +59,25 @@ const Navigation = () => {
         </button>
 
         {/* Search bar for mobile - always visible */}
-        <div className="mobile-search-container">
-          <input 
-            type="text" 
-            className="mobile-search-input" 
-            placeholder="Search..." 
-          />
-          <button className="mobile-search-btn">🔍</button>
-        </div>
+        <SearchBox 
+          variant="mobile"
+          placeholder="Search..."
+          className="mobile-search-container"
+          showTrending={false}
+        />
 
         <ul className={`nav-menu ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <li className="nav-item">
             <Link to="/" className="nav-link" onClick={closeMobileMenu}>Home</Link>
           </li>
           <li className="nav-item">
-            <Link to="/latest-job" className="nav-link" onClick={closeMobileMenu}>Latest Job</Link>
+            <Link to="/jobs" className="nav-link" onClick={closeMobileMenu}>Latest Jobs</Link>
           </li>
           <li className="nav-item">
             <Link to="/admit-card" className="nav-link" onClick={closeMobileMenu}>Admit Card</Link>
           </li>
           <li className="nav-item">
-            <Link to="/result" className="nav-link" onClick={closeMobileMenu}>Result</Link>
+            <Link to="/results" className="nav-link" onClick={closeMobileMenu}>Results</Link>
           </li>
           <li className="nav-item">
             <Link to="/admission" className="nav-link" onClick={closeMobileMenu}>Admission</Link>
@@ -98,14 +97,12 @@ const Navigation = () => {
             </div>
           </li>
           <li className="nav-item nav-search desktop-search">
-            <div className="nav-search-container">
-              <input 
-                type="text" 
-                className="nav-search-input" 
-                placeholder="Search..." 
-              />
-              <button className="nav-search-btn">🔍</button>
-            </div>
+            <SearchBox 
+              variant="desktop"
+              placeholder="Search..."
+              className="nav-search-container"
+              showTrending={true}
+            />
           </li>
           
           {/* Mobile Theme Toggle - Only visible on mobile */}

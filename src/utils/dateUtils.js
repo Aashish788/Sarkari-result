@@ -83,4 +83,42 @@ export const getCurrentDateDDMMYYYY = () => {
   const month = String(now.getMonth() + 1).padStart(2, '0');
   const year = now.getFullYear();
   return `${day}-${month}-${year}`;
-}; 
+};
+
+// Function to convert simple format to Date object for sorting (from searchService)
+export const convertSimpleFormatToDate = (postTime) => {
+  if (!postTime) return new Date(0);
+  try {
+    if (postTime.includes('/')) {
+      const parts = postTime.split(' ');
+      if (parts.length >= 3) {
+        const datePart = parts[0];
+        const timePart = parts[1];
+        const ampm = parts[2];
+        
+        const [day, month, year] = datePart.split('/');
+        const [hours, minutes] = timePart.split(':');
+        
+        let hour24 = parseInt(hours);
+        if (ampm === 'PM' && hour24 !== 12) hour24 += 12;
+        if (ampm === 'AM' && hour24 === 12) hour24 = 0;
+        
+        const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), hour24, parseInt(minutes));
+        return date;
+      }
+    }
+    return new Date(postTime);
+  } catch (error) {
+    console.error('Error converting date:', error);
+    return new Date(0);
+  }
+};
+
+// Sort function for consistent sorting like in search service
+export const sortByDateConsistent = (items, primaryDateField = 'post_time', fallbackDateField = 'created_at') => {
+  return items.sort((a, b) => {
+    const dateA = convertSimpleFormatToDate(a[primaryDateField] || a[fallbackDateField]);
+    const dateB = convertSimpleFormatToDate(b[primaryDateField] || b[fallbackDateField]);
+    return dateB - dateA; // Most recent first
+  });
+};

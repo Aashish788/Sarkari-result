@@ -16,22 +16,29 @@
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",
     "react-router-dom": "^6.3.0",
+    "react-schemaorg": "^2.0.0",
     "react-scripts": "5.0.1",
+    "react-use-measure": "^2.1.7",
+    "schema-dts": "^1.1.5",
     "sharp": "^0.34.2",
+    "sitemap": "^8.0.0",
     "slugify": "^1.6.6",
     "web-push": "^3.6.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && npm run generate-sw",
+    "build": "react-scripts build && npm run generate-sw && npm run generate-seo",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate-icons": "node public/icons/generate-icons.js && node public/icons/create-pngs.js",
     "generate-sw": "echo 'Service worker generated during build'",
+    "generate-seo": "node scripts/generateSEOFiles.js",
     "pwa-audit": "npx lighthouse http://localhost:3000 --only-categories=pwa --chrome-flags='--headless'",
+    "seo-audit": "npx lighthouse http://localhost:3000 --only-categories=seo,performance,accessibility,best-practices --chrome-flags='--headless'",
     "serve-build": "npx serve -s build -l 3000",
-    "analyze-bundle": "npx source-map-explorer 'build/static/js/*.js'"
+    "analyze-bundle": "npx source-map-explorer 'build/static/js/*.js'",
+    "test-seo": "npm run build && npm run serve-build & sleep 5 && npm run seo-audit"
   },
   "eslintConfig": {
     "extends": [

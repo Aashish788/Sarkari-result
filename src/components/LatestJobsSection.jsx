@@ -236,9 +236,9 @@ const LatestJobsSection = () => {
         style={{ marginBottom: 16, padding: 8, width: '100%' }}
       />
       {loading ? (
-        <div className="loading-skeleton">
+        <div className="loading-skeleton-list">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="skeleton-item" />
+            <div key={i} className="skeleton-list-item" />
           ))}
         </div>
       ) : (
