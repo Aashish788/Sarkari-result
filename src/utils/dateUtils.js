@@ -122,3 +122,106 @@ export const sortByDateConsistent = (items, primaryDateField = 'post_time', fall
     return dateB - dateA; // Most recent first
   });
 };
+
+// Check if the application period has started
+export const hasApplicationStarted = (startDate) => {
+  if (!startDate || startDate === 'To be announced') {
+    return false;
+  }
+  
+  try {
+    // Convert DD-MM-YYYY format to Date object
+    const [day, month, year] = startDate.split('-');
+    const applicationStartDate = new Date(year, month - 1, day);
+    const currentDate = new Date();
+    
+    // Set time to start of day for comparison
+    applicationStartDate.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+    
+    return currentDate >= applicationStartDate;
+  } catch (error) {
+    console.error('Error checking application start date:', error);
+    return false;
+  }
+};
+
+// Check if the application period has ended
+export const hasApplicationEnded = (endDate) => {
+  if (!endDate || endDate === 'To be announced') {
+    return false;
+  }
+  
+  try {
+    // Convert DD-MM-YYYY format to Date object
+    const [day, month, year] = endDate.split('-');
+    const applicationEndDate = new Date(year, month - 1, day);
+    const currentDate = new Date();
+    
+    // Set time to end of day for comparison
+    applicationEndDate.setHours(23, 59, 59, 999);
+    currentDate.setHours(0, 0, 0, 0);
+    
+    return currentDate > applicationEndDate;
+  } catch (error) {
+    console.error('Error checking application end date:', error);
+    return false;
+  }
+};
+
+// Get application status for display
+export const getApplicationStatus = (startDate, endDate, applyLink) => {
+  const hasStarted = hasApplicationStarted(startDate);
+  const hasEnded = hasApplicationEnded(endDate);
+  const hasValidLink = applyLink && applyLink !== '#' && applyLink.trim() !== '';
+  
+  if (hasEnded) {
+    return {
+      status: 'ended',
+      label: 'Applications Closed',
+      canApply: false,
+      buttonText: 'Applications Closed',
+      showOpeningSoon: false,
+      showApplicationClosed: true
+    };
+  }
+  
+  if (!hasStarted) {
+    const linkActivationText = startDate && startDate !== 'To be announced' 
+      ? `Link Activate on ${startDate}` 
+      : 'Link Activate on apply start date';
+      
+    return {
+      status: 'not-started',
+      label: 'Opening Soon',
+      canApply: false,
+      buttonText: hasValidLink ? 'Opening Soon' : linkActivationText,
+      showOpeningSoon: true,
+      showApplicationClosed: false
+    };
+  }
+  
+  if (hasStarted && !hasValidLink) {
+    const linkActivationText = startDate && startDate !== 'To be announced' 
+      ? `Link was supposed to activate on ${startDate}` 
+      : 'Link Activate on apply start date';
+      
+    return {
+      status: 'link-pending',
+      label: 'Active',
+      canApply: false,
+      buttonText: linkActivationText,
+      showOpeningSoon: false,
+      showApplicationClosed: false
+    };
+  }
+  
+  return {
+    status: 'active',
+    label: 'Active',
+    canApply: true,
+    buttonText: 'Click Here',
+    showOpeningSoon: false,
+    showApplicationClosed: false
+  };
+};

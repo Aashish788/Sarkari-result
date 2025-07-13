@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { formatDateToDDMMYYYY } from '../utils/dateUtils';
+import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 
 const AdmissionDetails = () => {
   const { slug } = useParams();
@@ -95,8 +95,31 @@ const AdmissionDetails = () => {
         <ul className="date-list">
           <li><strong>Course Name:</strong> {admission.course_name || 'To be announced'}</li>
           <li><strong>Institution Name:</strong> {admission.institution_name || 'To be announced'}</li>
-          <li><strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(admission.apply_start_date) || 'To be announced'}</li>
-          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(admission.apply_end_date) || 'To be announced'}</li>
+          <li>
+            <strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(admission.apply_start_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(admission.apply_start_date), 
+                formatDateToDDMMYYYY(admission.apply_end_date), 
+                admission.apply_link
+              );
+              return applicationStatus.showOpeningSoon && (
+                <span className="opening-soon-tag">Opening Soon</span>
+              );
+            })()}
+          </li>
+          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(admission.apply_end_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(admission.apply_start_date), 
+                formatDateToDDMMYYYY(admission.apply_end_date), 
+                admission.apply_link
+              );
+              return applicationStatus.showApplicationClosed && (
+                <span className="application-closed-tag">Application Closed</span>
+              );
+            })()}
+          </li>
           <li><strong>Last Date For Fee Payment:</strong> {formatDateToDDMMYYYY(admission.fee_payment_date) || 'To be announced'}</li>
           <li><strong>Correction Start Date:</strong> {formatDateToDDMMYYYY(admission.correction_start_date) || 'To be announced'}</li>
           <li><strong>Correction End Date:</strong> {formatDateToDDMMYYYY(admission.correction_end_date) || 'To be announced'}</li>
@@ -160,12 +183,37 @@ const AdmissionDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {admission.apply_link && (
-                <tr>
-                  <td>Apply Online</td>
-                  <td><a href={admission.apply_link} target="_blank" rel="noopener noreferrer" className="apply-link">Click Here</a></td>
-                </tr>
-              )}
+              <tr>
+                <td>Apply Online</td>
+                <td>
+                  {(() => {
+                    const applicationStatus = getApplicationStatus(
+                      formatDateToDDMMYYYY(admission.apply_start_date), 
+                      formatDateToDDMMYYYY(admission.apply_end_date), 
+                      admission.apply_link
+                    );
+                    
+                    if (applicationStatus.canApply) {
+                      return (
+                        <a 
+                          href={admission.apply_link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="apply-link active"
+                        >
+                          {applicationStatus.buttonText}
+                        </a>
+                      );
+                    } else {
+                      return (
+                        <span className={`apply-link disabled ${applicationStatus.status}`}>
+                          {applicationStatus.buttonText}
+                        </span>
+                      );
+                    }
+                  })()}
+                </td>
+              </tr>
               {admission.notification_link && (
                 <tr>
                   <td>Download Notification</td>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { formatDateToDDMMYYYY } from '../utils/dateUtils';
+import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 
 const ResultDetails = () => {
   const { slug } = useParams();
@@ -93,8 +93,31 @@ const ResultDetails = () => {
       <div className="job-section">
         <h2>Important Dates</h2>
         <ul className="date-list">
-          <li><strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(result.apply_start_date) || 'To be announced'}</li>
-          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(result.apply_end_date) || 'To be announced'}</li>
+          <li>
+            <strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(result.apply_start_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(result.apply_start_date), 
+                formatDateToDDMMYYYY(result.apply_end_date), 
+                result.apply_link
+              );
+              return applicationStatus.showOpeningSoon && (
+                <span className="opening-soon-tag">Opening Soon</span>
+              );
+            })()}
+          </li>
+          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(result.apply_end_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(result.apply_start_date), 
+                formatDateToDDMMYYYY(result.apply_end_date), 
+                result.apply_link
+              );
+              return applicationStatus.showApplicationClosed && (
+                <span className="application-closed-tag">Application Closed</span>
+              );
+            })()}
+          </li>
           <li><strong>Last Date For Fee Payment:</strong> {formatDateToDDMMYYYY(result.fee_payment_date) || 'To be announced'}</li>
           <li><strong>Correction Start Date:</strong> {formatDateToDDMMYYYY(result.correction_start_date) || 'To be announced'}</li>
           <li><strong>Correction End Date:</strong> {formatDateToDDMMYYYY(result.correction_end_date) || 'To be announced'}</li>
@@ -138,12 +161,37 @@ const ResultDetails = () => {
               </tr>
             </thead>
             <tbody>
-              {result.apply_link && (
-                <tr>
-                  <td>Apply Online</td>
-                  <td><a href={result.apply_link} target="_blank" rel="noopener noreferrer" className="apply-link">Click Here</a></td>
-                </tr>
-              )}
+              <tr>
+                <td>Apply Online</td>
+                <td>
+                  {(() => {
+                    const applicationStatus = getApplicationStatus(
+                      formatDateToDDMMYYYY(result.apply_start_date), 
+                      formatDateToDDMMYYYY(result.apply_end_date), 
+                      result.apply_link
+                    );
+                    
+                    if (applicationStatus.canApply) {
+                      return (
+                        <a 
+                          href={result.apply_link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="apply-link active"
+                        >
+                          {applicationStatus.buttonText}
+                        </a>
+                      );
+                    } else {
+                      return (
+                        <span className={`apply-link disabled ${applicationStatus.status}`}>
+                          {applicationStatus.buttonText}
+                        </span>
+                      );
+                    }
+                  })()}
+                </td>
+              </tr>
               {result.notification_link && (
                 <tr>
                   <td>Download Notification</td>

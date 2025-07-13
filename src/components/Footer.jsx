@@ -35,7 +35,6 @@ const Footer = () => {
           <a href="/contact">Contact</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/disclaimer">Disclaimer</a>
-          <a href="/admin" style={{ fontWeight: 'bold', color: '#e74c3c' }}>Admin</a>
         </div>
         
         <div className="copyright">

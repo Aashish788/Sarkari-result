@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { formatDateToDDMMYYYY } from '../utils/dateUtils';
+import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -104,8 +104,31 @@ const JobDetails = () => {
       <div className="job-section">
         <h2>Important Dates</h2>
         <ul className="date-list">
-          <li><strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(job.apply_start_date) || 'To be announced'}</li>
-          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(job.apply_end_date) || 'To be announced'}</li>
+          <li>
+            <strong>Online Apply Start Date:</strong> {formatDateToDDMMYYYY(job.apply_start_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(job.apply_start_date), 
+                formatDateToDDMMYYYY(job.apply_end_date), 
+                job.apply_link
+              );
+              return applicationStatus.showOpeningSoon && (
+                <span className="opening-soon-tag">Opening Soon</span>
+              );
+            })()}
+          </li>
+          <li><strong>Online Apply Last Date:</strong> {formatDateToDDMMYYYY(job.apply_end_date) || 'To be announced'}
+            {(() => {
+              const applicationStatus = getApplicationStatus(
+                formatDateToDDMMYYYY(job.apply_start_date), 
+                formatDateToDDMMYYYY(job.apply_end_date), 
+                job.apply_link
+              );
+              return applicationStatus.showApplicationClosed && (
+                <span className="application-closed-tag">Application Closed</span>
+              );
+            })()}
+          </li>
           <li><strong>Last Date For Fee Payment:</strong> {formatDateToDDMMYYYY(job.fee_payment_date) || 'To be announced'}</li>
           <li><strong>Exam Date:</strong> {formatDateToDDMMYYYY(job.exam_date) || 'To be notified'}</li>
           <li><strong>Admit Card:</strong> {formatDateToDDMMYYYY(job.admit_card_date) || 'Before Exam'}</li>
@@ -262,9 +285,32 @@ const JobDetails = () => {
               <tr>
                 <td>Apply Online</td>
                 <td>
-                  <a href={job.apply_link || '#'} target="_blank" rel="noopener noreferrer">
-                    Click Here
-                  </a>
+                  {(() => {
+                    const applicationStatus = getApplicationStatus(
+                      formatDateToDDMMYYYY(job.apply_start_date), 
+                      formatDateToDDMMYYYY(job.apply_end_date), 
+                      job.apply_link
+                    );
+                    
+                    if (applicationStatus.canApply) {
+                      return (
+                        <a 
+                          href={job.apply_link} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="apply-link active"
+                        >
+                          {applicationStatus.buttonText}
+                        </a>
+                      );
+                    } else {
+                      return (
+                        <span className={`apply-link disabled ${applicationStatus.status}`}>
+                          {applicationStatus.buttonText}
+                        </span>
+                      );
+                    }
+                  })()}
                 </td>
               </tr>
               <tr>
