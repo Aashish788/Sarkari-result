@@ -182,7 +182,8 @@ export const getApplicationStatus = (startDate, endDate, applyLink) => {
       canApply: false,
       buttonText: 'Applications Closed',
       showOpeningSoon: false,
-      showApplicationClosed: true
+      showApplicationClosed: true,
+      showLive: false
     };
   }
   
@@ -197,7 +198,8 @@ export const getApplicationStatus = (startDate, endDate, applyLink) => {
       canApply: false,
       buttonText: hasValidLink ? 'Opening Soon' : linkActivationText,
       showOpeningSoon: true,
-      showApplicationClosed: false
+      showApplicationClosed: false,
+      showLive: false
     };
   }
   
@@ -212,7 +214,8 @@ export const getApplicationStatus = (startDate, endDate, applyLink) => {
       canApply: false,
       buttonText: linkActivationText,
       showOpeningSoon: false,
-      showApplicationClosed: false
+      showApplicationClosed: false,
+      showLive: true
     };
   }
   
@@ -222,6 +225,7 @@ export const getApplicationStatus = (startDate, endDate, applyLink) => {
     canApply: true,
     buttonText: 'Click Here',
     showOpeningSoon: false,
-    showApplicationClosed: false
+    showApplicationClosed: false,
+    showLive: true
   };
 };

@@ -103,8 +103,15 @@ const AdmissionDetails = () => {
                 formatDateToDDMMYYYY(admission.apply_end_date), 
                 admission.apply_link
               );
-              return applicationStatus.showOpeningSoon && (
-                <span className="opening-soon-tag">Opening Soon</span>
+              return (
+                <>
+                  {applicationStatus.showOpeningSoon && (
+                    <span className="opening-soon-tag">Opening Soon</span>
+                  )}
+                  {applicationStatus.showLive && (
+                    <span className="live-tag">Live</span>
+                  )}
+                </>
               );
             })()}
           </li>
