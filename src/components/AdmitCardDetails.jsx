@@ -96,9 +96,9 @@ const AdmitCardDetails = () => {
           <li><strong>Exam Name:</strong> {admitCard.exam_name || 'To be announced'}</li>
           <li><strong>Exam Date:</strong> {formatDateToDDMMYYYY(admitCard.exam_date) || 'To be announced'}</li>
           <li><strong>Admit Card Available Date:</strong> {formatDateToDDMMYYYY(admitCard.admit_card_available_date) || 'To be announced'}</li>
-          <li><strong>Admit Card Download Last Date:</strong> {formatDateToDDMMYYYY(admitCard.admit_card_download_last_date) || 'To be announced'}</li>
-          <li><strong>Exam City Date:</strong> {formatDateToDDMMYYYY(admitCard.exam_city_date) || 'To be announced'}</li>
-          <li><strong>Exam Shift Date:</strong> {formatDateToDDMMYYYY(admitCard.exam_shift_date) || 'To be announced'}</li>
+          <li><strong>Admit Card Download Last Date:</strong> {formatDateToDDMMYYYY(admitCard.admit_card_download_last_date) || 'On the Last Day Of Exam'}</li>
+          <li><strong>Exam City Date:</strong> {formatDateToDDMMYYYY(admitCard.exam_city_date) || 'Listed in your Admit card'}</li>
+          <li><strong>Exam Shift Date:</strong> {formatDateToDDMMYYYY(admitCard.exam_shift_date) || 'Listed in your Admit card'}</li>
         </ul>
       </div>
 

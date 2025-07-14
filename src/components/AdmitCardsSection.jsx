@@ -95,7 +95,7 @@ const AdmitCardsSection = () => {
       </ul>
       )}
       <div className="view-more">
-        <Link to="/admit-cards" className="view-more-btn">View More</Link>
+        <Link to="/admit-card" className="view-more-btn">View More</Link>
       </div>
     </div>
   );

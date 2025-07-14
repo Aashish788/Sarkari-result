@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -205,7 +205,7 @@ const DEFAULT_FORMS = {
     apply_link: '',
     notification_link: '',
     official_website: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     status: 'active',
     is_featured: false,
     is_quick_link: false
@@ -235,7 +235,7 @@ const DEFAULT_FORMS = {
     apply_link: '',
     notification_link: '',
     official_website: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     display_order: 0,
     is_featured: false,
     is_quick_link: false
@@ -260,7 +260,7 @@ const DEFAULT_FORMS = {
     download_link: '',
     notification_link: '',
     official_website: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     display_order: 0,
     is_featured: false,
     is_quick_link: false
@@ -287,7 +287,7 @@ const DEFAULT_FORMS = {
     download_link: '',
     notification_link: '',
     official_website: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     display_order: 0,
     is_featured: false,
     is_quick_link: false
@@ -303,7 +303,7 @@ const DEFAULT_FORMS = {
     view_count: 0,
     meta_title: '',
     meta_description: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     display_order: 0,
     is_featured: false,
     is_quick_link: false
@@ -339,7 +339,7 @@ const DEFAULT_FORMS = {
     apply_link: '',
     notification_link: '',
     official_website: '',
-    post_time: new Date().toISOString().slice(0, 10),
+    post_time: getCurrentISTTimestamp(),
     display_order: 0,
     is_featured: false,
     is_quick_link: false
@@ -418,6 +418,11 @@ const TABLE_COLUMNS = {
   ]
 };
 
+// Simplified columns for jobs view
+const SIMPLIFIED_COLUMNS = {
+  jobs: ['title', 'apply_start_date', 'apply_end_date', 'post_time'] // Clean view - only essential visible columns
+};
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const { isAdmin, loading: authLoading, signOut } = useAuth();
@@ -428,8 +433,58 @@ const AdminDashboard = () => {
   const [form, setForm] = useState(DEFAULT_FORMS[activeTab]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [loggingOut, setLoggingOut] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [isSimplifiedView, setIsSimplifiedView] = useState(false); // New state for view toggle
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    try {
+      // For tables with post_time, order by it; otherwise use display_order or created_at
+      const orderColumn = ['jobs', 'results', 'admit_cards', 'answer_keys', 'admissions', 'documents'].includes(activeTab) 
+        ? 'post_time' 
+        : (activeTab === 'categories' || activeTab === 'organizations') 
+          ? 'created_at' 
+          : 'display_order';
+      
+      // Get columns based on current view mode
+      const columnsToSelect = (activeTab === 'jobs' && isSimplifiedView) 
+        ? ['id', 'is_quick_link', ...SIMPLIFIED_COLUMNS[activeTab]] // Include id and is_quick_link for actions, but don't display them
+        : TABLE_COLUMNS[activeTab];
+      
+      const { data: fetchedData, error } = await supabase
+        .from(activeTab)
+        .select(columnsToSelect.join(','))
+        .order(orderColumn, { ascending: false });
+      
+      if (error) {
+        throw error;
+      }
+
+      // For content tables with post_time, sort client-side to ensure proper chronological order
+      let sortedData = fetchedData || [];
+      if (['jobs', 'results', 'admit_cards', 'answer_keys', 'admissions', 'documents'].includes(activeTab)) {
+        sortedData = sortedData.sort((a, b) => {
+          const dateA = convertSimpleFormatToDate(a.post_time || a.created_at);
+          const dateB = convertSimpleFormatToDate(b.post_time || b.created_at);
+          return dateB - dateA; // Most recent first
+        });
+        
+        console.log('Admin data sorted by post_time:', sortedData.map(item => ({
+          title: item.title || item.name,
+          post_time: item.post_time,
+          parsed_date: convertSimpleFormatToDate(item.post_time || item.created_at)
+        })));
+      }
+
+      setData(sortedData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError(`Failed to fetch ${activeTab}: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  }, [activeTab, isSimplifiedView]);
 
   useEffect(() => {
     if (!authLoading && !isAdmin) {
@@ -443,7 +498,7 @@ const AdminDashboard = () => {
     if (isAdmin) {
       fetchData();
     }
-  }, [isAdmin, authLoading]);
+  }, [isAdmin, authLoading, navigate, fetchData]);
 
 
 
@@ -459,7 +514,14 @@ const AdminDashboard = () => {
     if (isAdmin) {
       fetchData();
     }
-  }, [activeTab, isAdmin]);
+  }, [activeTab, isAdmin, fetchData]);
+
+  // Refetch data when view mode changes for jobs
+  useEffect(() => {
+    if (isAdmin && activeTab === 'jobs') {
+      fetchData();
+    }
+  }, [isSimplifiedView, isAdmin, activeTab, fetchData]);
 
   // Real-time subscription for admin dashboard
   useEffect(() => {
@@ -530,73 +592,50 @@ const AdminDashboard = () => {
     };
   }, [activeTab, isAdmin]);
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      // For tables with post_time, order by it; otherwise use display_order or created_at
-      const orderColumn = ['jobs', 'results', 'admit_cards', 'answer_keys', 'admissions', 'documents'].includes(activeTab) 
-        ? 'post_time' 
-        : (activeTab === 'categories' || activeTab === 'organizations') 
-          ? 'created_at' 
-          : 'display_order';
-      
-      const { data: fetchedData, error } = await supabase
-        .from(activeTab)
-        .select(TABLE_COLUMNS[activeTab].join(','))
-        .order(orderColumn, { ascending: false });
-      
-      if (error) {
-        throw error;
-      }
-
-      // For content tables with post_time, sort client-side to ensure proper chronological order
-      let sortedData = fetchedData || [];
-      if (['jobs', 'results', 'admit_cards', 'answer_keys', 'admissions', 'documents'].includes(activeTab)) {
-        sortedData = sortedData.sort((a, b) => {
-          const dateA = convertSimpleFormatToDate(a.post_time || a.created_at);
-          const dateB = convertSimpleFormatToDate(b.post_time || b.created_at);
-          return dateB - dateA; // Most recent first
-        });
-        
-        console.log('Admin data sorted by post_time:', sortedData.map(item => ({
-          title: item.title || item.name,
-          post_time: item.post_time,
-          parsed_date: convertSimpleFormatToDate(item.post_time)
-        })));
-      }
-
-      setData(sortedData);
-    } catch (error) {
-      console.error('Fetch error:', error);
-      setError(`Failed to fetch ${activeTab}: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleEdit = (item) => {
+  const handleEdit = async (item) => {
     setEditing(item.id);
     setError('');
     setSuccess('');
     
-    // Load existing item data into form and convert dates to DD-MM-YYYY format for display
-    const formData = { 
-      ...item,
-      // Keep existing slug if it exists, otherwise generate new one
-      slug: item.slug || generateSlug(item.title || item.name || '')
-    };
-    
-    // Convert date fields from YYYY-MM-DD to DD-MM-YYYY for form display
-    Object.keys(formData).forEach(key => {
-      if (key.includes('date') && key !== 'post_time' && formData[key]) {
-        formData[key] = formatDateToDDMMYYYY(formData[key]);
+    try {
+      // If we're in simplified view, we need to fetch the complete item data
+      let completeItem = item;
+      if (activeTab === 'jobs' && isSimplifiedView) {
+        const { data: fullData, error } = await supabase
+          .from(activeTab)
+          .select('*')
+          .eq('id', item.id)
+          .single();
+        
+        if (error) {
+          throw error;
+        }
+        
+        completeItem = fullData;
       }
-    });
-    
-    console.log('Loading edit form with data:', formData);
-    setForm(formData);
-    setShowForm(true);
+      
+      // Load existing item data into form and convert dates to DD-MM-YYYY format for display
+      const formData = { 
+        ...DEFAULT_FORMS[activeTab], // Start with default form to ensure all fields exist
+        ...completeItem, // Override with actual data
+        // Keep existing slug if it exists, otherwise generate new one
+        slug: completeItem.slug || generateSlug(completeItem.title || completeItem.name || '')
+      };
+      
+      // Convert date fields from YYYY-MM-DD to DD-MM-YYYY for form display
+      Object.keys(formData).forEach(key => {
+        if (key.includes('date') && key !== 'post_time' && formData[key]) {
+          formData[key] = formatDateToDDMMYYYY(formData[key]);
+        }
+      });
+      
+      console.log('Loading edit form with data:', formData);
+      setForm(formData);
+      setShowForm(true);
+    } catch (error) {
+      console.error('Edit error:', error);
+      setError(`Failed to load item for editing: ${error.message}`);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -842,12 +881,17 @@ const AdminDashboard = () => {
       );
     }
 
+    // Get columns based on current view mode
+    const currentColumns = (activeTab === 'jobs' && isSimplifiedView) 
+      ? SIMPLIFIED_COLUMNS[activeTab] 
+      : TABLE_COLUMNS[activeTab];
+
     return (
       <div className="table-container">
         <table className="admin-table">
           <thead>
             <tr className="table-header">
-              {TABLE_COLUMNS[activeTab].map(column => (
+              {currentColumns.map(column => (
                 <th
                   key={column}
                   className="table-header-cell"
@@ -866,7 +910,7 @@ const AdminDashboard = () => {
                 key={item.id}
                 className={`table-row ${index % 2 === 0 ? 'even-row' : 'odd-row'}`}
               >
-                {TABLE_COLUMNS[activeTab].map(column => (
+                {currentColumns.map(column => (
                   <td
                     key={column}
                     className="table-cell"
@@ -1104,6 +1148,14 @@ const AdminDashboard = () => {
               {loading ? 'Refreshing...' : '🔄 Refresh'}
             </button>
 
+            {activeTab === 'jobs' && (
+              <button
+                onClick={() => setIsSimplifiedView(!isSimplifiedView)}
+                className={`view-toggle-button ${isSimplifiedView ? 'active' : ''}`}
+              >
+                {isSimplifiedView ? '🔍 View All' : '📋 View Simplified'}
+              </button>
+            )}
           </div>
         ) : (
           <div className="form-container">
@@ -1179,7 +1231,7 @@ const AdminDashboard = () => {
                       <select
                         id={key}
                         name={key}
-                        value={form[key].toString()}
+                        value={(form[key] !== undefined ? form[key] : DEFAULT_FORMS[activeTab][key]).toString()}
                         onChange={handleFormChange}
                         className="form-select"
                       >
@@ -1242,7 +1294,7 @@ const AdminDashboard = () => {
                       <select
                         id={key}
                         name={key}
-                        value={form[key]}
+                        value={form[key] || DEFAULT_FORMS[activeTab][key] || 'active'}
                         onChange={handleFormChange}
                         className="form-select"
                       >
@@ -1284,4 +1336,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard; 
+export default AdminDashboard;

@@ -125,6 +125,37 @@
   transform: none;
 }
 
+.view-toggle-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--accent-secondary);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.view-toggle-button:hover {
+  background: var(--accent-secondary);
+  color: var(--bg-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.view-toggle-button.active {
+  background: var(--accent-secondary);
+  color: var(--bg-primary);
+  border-color: var(--accent-secondary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .form-container {
   background: var(--bg-tertiary);
   padding: 24px;
