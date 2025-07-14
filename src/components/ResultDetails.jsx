@@ -211,6 +211,12 @@ const ResultDetails = () => {
                   <td><a href={result.official_website} target="_blank" rel="noopener noreferrer" className="official-link">Click Here</a></td>
                 </tr>
               )}
+              {result.result_pdf_url && (
+                <tr>
+                  <td>Download Result</td>
+                  <td><a href={result.result_pdf_url} target="_blank" rel="noopener noreferrer" className="apply-link">Click Here</a></td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
