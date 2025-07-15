@@ -615,6 +615,99 @@ body {
     max-width: 280px;
     justify-content: center;
   }
+
+  /* Fix text wrapping and badge positioning for mobile */
+  .section-list a {
+    display: block !important;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    line-height: 1.5;
+    padding-right: 4px;
+  }
+
+  .section-list li {
+    position: relative;
+  }
+
+  /* Move badges to new line on mobile for better readability */
+  .new-badge,
+  .date-badge {
+    display: block;
+    margin-left: 0 !important;
+    margin-top: 6px;
+    width: fit-content;
+    font-size: 0.7rem !important;
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+
+  /* Ensure text content takes full width */
+  .section-list a:not(.new-badge):not(.date-badge) {
+    display: block;
+    width: 100%;
+    margin-bottom: 4px;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Additional mobile text wrapping improvements */
+@media (max-width: 480px) {
+  .section-list a {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+    padding-right: 8px;
+  }
+
+  .section-title {
+    font-size: 0.95rem !important;
+    word-wrap: break-word;
+  }
+
+  /* Ensure proper spacing for wrapped text */
+  .section-list li {
+    padding: 10px 0 !important;
+    min-height: auto;
+  }
+
+  /* Better badge positioning on very small screens */
+  .new-badge,
+  .date-badge {
+    font-size: 0.65rem !important;
+    padding: 2px 6px !important;
+    margin-top: 4px !important;
+  }
+
+  /* Improve readability on small screens */
+  .mobile-layout .section-list a {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* Fix for flexbox layout causing text overflow issues */
+.section-list a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Text content wrapper for better mobile layout */
+.section-list .link-text {
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  min-width: 0;
+}
+
+.section-list .link-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+  align-items: flex-end;
 }
 
 /* Quick Links */
@@ -832,9 +925,13 @@ body {
   line-height: 1.5;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-weight: 500;
   transition: all 0.2s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  gap: 8px;
 }
 
 .section-list a:hover {
@@ -1330,16 +1427,25 @@ body {
   
   .mobile-layout .section-list a {
     font-size: 0.875rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    display: block !important;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
   
   .mobile-layout .new-badge,
   .mobile-layout .date-badge {
-    font-size: 0.625rem;
-    padding: 2px 6px;
-    margin-left: 6px;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    margin-left: 0;
+    margin-top: 6px;
     border-radius: 8px;
     font-weight: 600;
+    display: block;
+    width: fit-content;
   }
   
   .mobile-layout .view-more {
