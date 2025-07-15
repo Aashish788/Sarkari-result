@@ -125,11 +125,21 @@ const ResultDetails = () => {
               );
             })()}
           </li>
-          <li><strong>Last Date For Fee Payment:</strong> {formatDateToDDMMYYYY(result.fee_payment_date) || 'To be announced'}</li>
-          <li><strong>Correction Start Date:</strong> {formatDateToDDMMYYYY(result.correction_start_date) || 'To be announced'}</li>
-          <li><strong>Correction End Date:</strong> {formatDateToDDMMYYYY(result.correction_end_date) || 'To be announced'}</li>
-          <li><strong>PE Exam Date:</strong> {formatDateToDDMMYYYY(result.pe_exam_date) || 'To be announced'}</li>
-          <li><strong>PM/PMM Exam Date:</strong> {formatDateToDDMMYYYY(result.pm_pmm_exam_date) || 'To be announced'}</li>
+          {result.fee_payment_date && formatDateToDDMMYYYY(result.fee_payment_date) && (
+            <li><strong>Last Date For Fee Payment:</strong> {formatDateToDDMMYYYY(result.fee_payment_date)}</li>
+          )}
+          {result.correction_start_date && formatDateToDDMMYYYY(result.correction_start_date) && (
+            <li><strong>Correction Start Date:</strong> {formatDateToDDMMYYYY(result.correction_start_date)}</li>
+          )}
+          {result.correction_end_date && formatDateToDDMMYYYY(result.correction_end_date) && (
+            <li><strong>Correction End Date:</strong> {formatDateToDDMMYYYY(result.correction_end_date)}</li>
+          )}
+          {result.pe_exam_date && formatDateToDDMMYYYY(result.pe_exam_date) && (
+            <li><strong>PE Exam Date:</strong> {formatDateToDDMMYYYY(result.pe_exam_date)}</li>
+          )}
+          {result.pm_pmm_exam_date && formatDateToDDMMYYYY(result.pm_pmm_exam_date) && (
+            <li><strong>PM/PMM Exam Date:</strong> {formatDateToDDMMYYYY(result.pm_pmm_exam_date)}</li>
+          )}
           <li><strong>Admit Card:</strong> {formatDateToDDMMYYYY(result.admit_card_date) || 'Before Exam'}</li>
           <li><strong>Result Date:</strong> {formatDateToDDMMYYYY(result.result_declared_date) || 'Will be updated'}</li>
         </ul>
