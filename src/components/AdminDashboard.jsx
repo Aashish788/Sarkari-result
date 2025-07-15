@@ -418,9 +418,11 @@ const TABLE_COLUMNS = {
   ]
 };
 
-// Simplified columns for jobs view
+// Simplified columns for different sections
 const SIMPLIFIED_COLUMNS = {
-  jobs: ['title', 'apply_start_date', 'apply_end_date', 'post_time'] // Clean view - only essential visible columns
+  jobs: ['title', 'apply_start_date', 'apply_end_date', 'post_time'], // Clean view - only essential visible columns
+  admit_cards: ['title', 'exam_date', 'status', 'admit_card_available_date', 'post_time'], // Admit card essentials
+  results: ['title', 'result_date', 'post_time'] // Results essentials
 };
 
 const AdminDashboard = () => {
@@ -448,7 +450,7 @@ const AdminDashboard = () => {
           : 'display_order';
       
       // Get columns based on current view mode
-      const columnsToSelect = (activeTab === 'jobs' && isSimplifiedView) 
+      const columnsToSelect = ((activeTab === 'jobs' || activeTab === 'admit_cards' || activeTab === 'results') && isSimplifiedView) 
         ? ['id', 'is_quick_link', ...SIMPLIFIED_COLUMNS[activeTab]] // Include id and is_quick_link for actions, but don't display them
         : TABLE_COLUMNS[activeTab];
       
@@ -600,7 +602,7 @@ const AdminDashboard = () => {
     try {
       // If we're in simplified view, we need to fetch the complete item data
       let completeItem = item;
-      if (activeTab === 'jobs' && isSimplifiedView) {
+      if ((activeTab === 'jobs' || activeTab === 'admit_cards' || activeTab === 'results') && isSimplifiedView) {
         const { data: fullData, error } = await supabase
           .from(activeTab)
           .select('*')
@@ -882,7 +884,7 @@ const AdminDashboard = () => {
     }
 
     // Get columns based on current view mode
-    const currentColumns = (activeTab === 'jobs' && isSimplifiedView) 
+    const currentColumns = ((activeTab === 'jobs' || activeTab === 'admit_cards' || activeTab === 'results') && isSimplifiedView) 
       ? SIMPLIFIED_COLUMNS[activeTab] 
       : TABLE_COLUMNS[activeTab];
 
@@ -931,7 +933,7 @@ const AdminDashboard = () => {
                   >
                     Delete
                   </button>
-                  {activeTab === 'jobs' && (
+                  {(activeTab === 'jobs' || activeTab === 'admit_cards' || activeTab === 'results') && (
                     <button
                       onClick={() => handleQuickLinkToggle(item.id, item.is_quick_link)}
                       className={`action-button quick-link-button ${item.is_quick_link ? 'active' : ''}`}
@@ -1148,7 +1150,7 @@ const AdminDashboard = () => {
               {loading ? 'Refreshing...' : '🔄 Refresh'}
             </button>
 
-            {activeTab === 'jobs' && (
+            {(activeTab === 'jobs' || activeTab === 'admit_cards' || activeTab === 'results') && (
               <button
                 onClick={() => setIsSimplifiedView(!isSimplifiedView)}
                 className={`view-toggle-button ${isSimplifiedView ? 'active' : ''}`}
