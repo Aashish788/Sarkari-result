@@ -38,6 +38,7 @@ const Footer = () => {
         </div>
         
         <div className="copyright">
+          <p>Copyright © 2009 - 2025 | <strong>thesarkariresult.info</strong></p>
           <p style={{marginTop: '10px', fontSize: '12px', color: '#95a5a6'}}>
             This website is not associated with official websites. All information provided is for general informational purposes only.
           </p>
