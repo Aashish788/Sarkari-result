@@ -32,7 +32,12 @@ import ContactPage from './components/ContactPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import DisclaimerPage from './components/DisclaimerPage';
 import SyllabusPage from './components/SyllabusPage';
+import StudyResources from './components/StudyResources';
+import PreviousYearPapers from './components/PreviousYearPapers';
+import LatestUpdates from './components/LatestUpdates';
 import SearchResultsPage from './components/SearchResultsPage';
+import CareerBlog from './components/CareerBlog';
+import BlogPostPage from './components/BlogPostPage';
 import './App.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -259,6 +264,87 @@ function App() {
               </Helmet>
               
               <Routes>
+                <Route 
+                  path="/career-blog" 
+                  element={
+                    <>
+                      <SEO 
+                        title="Career Blog - Exam Preparation & Job Seeking Strategies"
+                        description="In-depth articles and guides on exam preparation, job-seeking strategies, interview tips, and career growth."
+                        keywords="career blog, exam preparation, job strategy, interview tips, resume writing"
+                      />
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <CareerBlog />
+                      <Footer />
+                    </>
+                  } 
+                />
+                <Route 
+                  path="/career-blog/:slug" 
+                  element={
+                    <>
+                      {/* SEO component is within BlogPostPage */}
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <BlogPostPage />
+                      <Footer />
+                    </>
+                  } 
+                />
+                <Route 
+                  path="/study-resources" 
+                  element={
+                    <>
+                      <SEO 
+                        title="Study Resources - Exam Preparation Materials"
+                        description="Find high-quality study materials, PDFs, and resources for government job exam preparation."
+                        keywords="study resources, exam preparation, study material, government jobs, pdf notes"
+                      />
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <StudyResources />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route 
+                  path="/previous-year-papers" 
+                  element={
+                    <>
+                      <SEO 
+                        title="Previous Year Papers - Question Bank"
+                        description="Download previous year question papers for UPSC, SSC, Banking, and other government exams."
+                        keywords="previous year papers, question bank, upsc papers, ssc papers, banking papers"
+                      />
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <PreviousYearPapers />
+                      <Footer />
+                    </>
+                  }
+                />
+                <Route 
+                  path="/latest-updates" 
+                  element={
+                    <>
+                      <SEO 
+                        title="Latest Updates - Job Notifications & News"
+                        description="Stay updated with the latest government job notifications, exam dates, results, and news."
+                        keywords="latest updates, job notifications, exam news, government announcements"
+                      />
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <LatestUpdates />
+                      <Footer />
+                    </>
+                  }
+                />
                 <Route path="/admin-login" element={
                   <>
                     <SEO 
@@ -599,6 +685,28 @@ function App() {
                       <Header />
                       <Navigation />
                       <DisclaimerPage />
+                      <Footer />
+                      <PWAInstallButton />
+                    </>
+                  }
+                />
+                <Route
+                  path="/career-blog"
+                  element={
+                    <>
+                      <SEO 
+                        title="Career Blog - Exam Preparation Guide & Success Tips"
+                        description="Expert career guidance and exam preparation tips. Learn how to prepare for competitive exams, what to bring on exam day, and proven strategies to pass any exam."
+                        keywords="career blog, exam preparation, competitive exams, study tips, exam strategy, success guide, government exam tips"
+                        breadcrumbs={[
+                          { name: 'Home', url: '/' },
+                          { name: 'Career Blog', url: '/career-blog' }
+                        ]}
+                      />
+                      <PWAStatus />
+                      <Header />
+                      <Navigation />
+                      <CareerBlog />
                       <Footer />
                       <PWAInstallButton />
                     </>

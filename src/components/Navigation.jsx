@@ -89,6 +89,15 @@ const Navigation = () => {
             <Link to="/answer-key" className="nav-link" onClick={closeMobileMenu}>Answer Key</Link>
           </li>
           <li className="nav-item">
+            <Link to="/career-blog" className="nav-link" onClick={closeMobileMenu}>Career Blog</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/study-resources" className="nav-link" onClick={closeMobileMenu}>Study Resources</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/previous-year-papers" className="nav-link" onClick={closeMobileMenu}>Previous Papers</Link>
+          </li>
+          <li className="nav-item">
             <Link to="#" className="nav-link">More</Link>
             <div className="dropdown">
               <Link to="/contact" onClick={closeMobileMenu}>Contact Us</Link>

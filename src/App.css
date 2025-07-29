@@ -2186,6 +2186,279 @@ td {
   max-width: 80px;
 }
 
+/* Study Resources Page Styles */
+.study-resources-page .page-title {
+  color: #2c3e50;
+}
+
+.study-resources-page .page-subtitle {
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  font-size: 1.15rem;
+  color: #7f8c8d;
+}
+
+.resource-category {
+  margin-bottom: 3.5rem;
+}
+
+.resource-category h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #34495e;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.resource-category h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  border-radius: 2px;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.resource-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.resource-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 1.5rem;
+}
+
+.resource-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(41, 128, 185, 0.15);
+  border-color: #3498db;
+}
+
+.resource-card-icon {
+  font-size: 2rem;
+  color: #3498db;
+  margin-right: 1.5rem;
+  width: 40px;
+  text-align: center;
+}
+
+.resource-card-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.resource-card-content p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.resource-card-content span {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  font-weight: 500;
+}
+
+/* Previous Year Papers Page Styles */
+.previous-papers-page .page-subtitle {
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  font-size: 1.15rem;
+  color: #7f8c8d;
+}
+
+.category-section {
+  margin-bottom: 2.5rem;
+}
+
+.category-section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.exam-accordion-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.exam-accordion-header {
+  background-color: #f9f9f9;
+  border: none;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.exam-accordion-header:hover {
+  background-color: #f1f1f1;
+}
+
+.exam-accordion-header .fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.exam-accordion-header .fa-chevron-down.open {
+  transform: rotate(180deg);
+}
+
+.exam-accordion-content {
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+}
+
+.exam-accordion-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exam-accordion-content li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.exam-accordion-content li a:hover {
+  background-color: #ecf5ff;
+}
+
+.exam-accordion-content li a .fa-external-link-alt {
+  font-size: 0.8em;
+  margin-left: 0.5rem;
+}
+
+/* Previous Year Papers Page Styles */
+.previous-papers-page .page-subtitle {
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  font-size: 1.15rem;
+  color: #7f8c8d;
+}
+
+.category-section {
+  margin-bottom: 2.5rem;
+}
+
+.category-section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.exam-accordion-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.exam-accordion-header {
+  background-color: #f9f9f9;
+  border: none;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.exam-accordion-header:hover {
+  background-color: #f1f1f1;
+}
+
+.exam-accordion-header .fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.exam-accordion-header .fa-chevron-down.open {
+  transform: rotate(180deg);
+}
+
+.exam-accordion-content {
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+}
+
+.exam-accordion-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exam-accordion-content li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #3498db;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.exam-accordion-content li a:hover {
+  background-color: #ecf5ff;
+}
+
+.exam-accordion-content li a .fa-external-link-alt {
+  font-size: 0.8em;
+  margin-left: 0.5rem;
+}
+
 /* Apply Last Date Styles */
 .apply-last-date {
   margin-top: 8px; /* Increased from 6px for better spacing */
