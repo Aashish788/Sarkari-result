@@ -1,0 +1,249 @@
+.job-analysis {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.job-analysis h2 {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+}
+
+.analysis-intro {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.analysis-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.analysis-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.analysis-card h3 {
+  margin: 0 0 15px 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.competition-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.competition-badge.high {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.competition-badge.very-high {
+  background: linear-gradient(45deg, #dc3545, #c0392b);
+  color: white;
+}
+
+.competition-badge.moderate {
+  background: linear-gradient(45deg, #ffa500, #f39c12);
+  color: white;
+}
+
+.competition-badge.low {
+  background: linear-gradient(45deg, #28a745, #27ae60);
+  color: white;
+}
+
+.salary-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.salary-range {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #27ae60;
+}
+
+.grade-badge {
+  background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.timeline-badge {
+  background: linear-gradient(45deg, #00b894, #00cec9);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.career-prospects {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.career-prospects h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.prospects-list {
+  list-style: none;
+  padding: 0;
+}
+
+.prospects-list li {
+  background: linear-gradient(45deg, #74b9ff, #0984e3);
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  position: relative;
+  padding-left: 50px;
+}
+
+.prospects-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.preparation-strategy {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.preparation-strategy h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.tip-card {
+  background: linear-gradient(45deg, #fd79a8, #e84393);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: scale(1.05);
+}
+
+.tip-number {
+  background: rgba(255, 255, 255, 0.3);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.expert-recommendation {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.expert-recommendation h3 {
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.recommendation-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 4px solid #fff;
+}
+
+.recommendation-box p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .job-analysis {
+    padding: 20px;
+  }
+  
+  .analysis-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .salary-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

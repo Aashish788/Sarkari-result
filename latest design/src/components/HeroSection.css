@@ -1,0 +1,269 @@
+.hero {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, 
+      rgba(16, 20, 66, 0.95) 0%,
+      rgba(13, 71, 161, 0.9) 50%,
+      rgba(1, 87, 155, 0.85) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='b' gradientTransform='rotate(30)'%3E%3Cstop offset='0%25' stop-color='%23ffffff11'/%3E%3Cstop offset='50%25' stop-color='%23ffffff05'/%3E%3Cstop offset='100%25' stop-color='%23ffffff00'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23b)' d='M760.8 376c68.4-42.9 128.7-123.9 124.8-208.7-3.9-84.8-76.8-127.8-147.9-142.7-71.1-14.9-161.3-22.1-224.7 19.4-63.4 41.4-98.1 141.4-98.6 221.4-.6 80 32.9 139.9 89.4 181.4 56.5 41.5 135.9 64.6 200.9 48.1 64.9-16.5 114.4-72.7 129.6-126.7 15.2-54.1-5.9-105.9-39.5-128.1-33.6-22.2-79.7-14.8-108.5 7.6'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 1000 1000' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientTransform='rotate(120)'%3E%3Cstop offset='0%25' stop-color='%23ffffff11'/%3E%3Cstop offset='50%25' stop-color='%23ffffff05'/%3E%3Cstop offset='100%25' stop-color='%23ffffff00'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23a)' d='M336.1 606.5c-67.4 44.6-150.5 83.3-213.3 60.3-62.8-23-81-121.8-91.8-200.1-10.8-78.3-23.9-154.3 11.6-214.2C77 192.6 130.7 132.4 198.3 108c67.7-24.4 149.1-12.9 206.8 27.6 57.7 40.5 91.6 110 78.1 167.8-13.5 57.8-74.4 103.9-123.7 128.4-49.4 24.5-87.2 27.4-102.1 49.4-14.9 21.9-6.9 63 15.2 81.7'/%3E%3C/svg%3E");
+  background-position: center, center, 100% 0%, 0% 100%;
+  background-size: cover, 80px 80px, 800px, 600px;
+  background-repeat: no-repeat, repeat, no-repeat, no-repeat;
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glass effect overlay */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+  opacity: 0.8;
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.hero-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.hero-button {
+  padding: 1.25rem 2rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.6);
+  animation: buttonPulse 2s infinite;
+}
+
+.hero-button i {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-button:hover i {
+  transform: scale(1.1);
+}
+
+.hero-button.primary {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.4), rgba(255, 107, 107, 0.2));
+}
+
+.hero-button.secondary {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.4), rgba(78, 205, 196, 0.2));
+}
+
+.hero-button.tertiary {
+  background: linear-gradient(135deg, rgba(69, 183, 209, 0.4), rgba(69, 183, 209, 0.2));
+}
+
+.hero-button.quaternary {
+  background: linear-gradient(135deg, rgba(150, 201, 61, 0.4), rgba(150, 201, 61, 0.2));
+}
+
+.hero-button.quinary {
+  background: linear-gradient(135deg, rgba(224, 86, 253, 0.4), rgba(224, 86, 253, 0.2));
+}
+
+.hero-button.senary {
+  background: linear-gradient(135deg, rgba(249, 202, 36, 0.4), rgba(249, 202, 36, 0.2));
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-btn {
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  width: 220px;
+  height: 48px;
+  color: white;
+}
+
+.social-btn i {
+  font-size: 1.4rem;
+}
+
+.whatsapp-btn {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.telegram-btn {
+  background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
+  border: 1px solid rgba(0, 136, 204, 0.3);
+}
+
+.social-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
+  filter: brightness(1.1);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+  }
+
+  .hero-buttons-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .whatsapp-btn,
+  .telegram-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Animations */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+  50% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.6);
+  }
+  100% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%, center, 100% 0%, 0% 100%;
+  }
+  50% {
+    background-position: 100% 50%, center, 110% 10%, -10% 90%;
+  }
+  100% {
+    background-position: 0% 50%, center, 100% 0%, 0% 100%;
+  }
+}
+
+/* Apply gradient animation to hero section */
+.hero {
+  animation: gradientAnimation 15s ease infinite;
+}

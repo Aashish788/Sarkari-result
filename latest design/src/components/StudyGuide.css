@@ -1,0 +1,687 @@
+.study-guide {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin: 40px 0;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.study-guide h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.guide-intro {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.study-plan-section,
+.subject-strategy-section,
+.books-section,
+.online-resources-section,
+.mock-test-section,
+.revision-section,
+.time-management-section,
+.motivation-section,
+.exam-day-section,
+.common-errors-section {
+  margin-bottom: 40px;
+}
+
+.study-plan-section h3,
+.subject-strategy-section h3,
+.books-section h3,
+.online-resources-section h3,
+.mock-test-section h3,
+.revision-section h3,
+.time-management-section h3,
+.motivation-section h3,
+.exam-day-section h3,
+.common-errors-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+.study-plan {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  backdrop-filter: blur(10px);
+}
+
+.plan-overview {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.plan-overview h4 {
+  color: #74b9ff;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.phases-timeline {
+  display: grid;
+  gap: 20px;
+}
+
+.phase-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid #74b9ff;
+}
+
+.phase-card h4 {
+  color: #fd79a8;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.phase-focus {
+  font-style: italic;
+  color: #74b9ff;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.phase-details {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: start;
+}
+
+.phase-subjects ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+}
+
+.phase-subjects li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 3px 5px 3px 0;
+  font-size: 0.9rem;
+}
+
+.phase-commitment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+}
+
+.daily-hours,
+.weekly-target {
+  background: rgba(116, 185, 255, 0.3);
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.subject-strategy-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  transition: transform 0.3s ease;
+}
+
+.subject-strategy-card:hover {
+  transform: translateY(-5px);
+}
+
+.subject-strategy-card h4 {
+  color: #fd79a8;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+.subject-meta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.weightage,
+.accuracy,
+.time {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.weightage {
+  background: rgba(116, 185, 255, 0.3);
+}
+
+.accuracy {
+  background: rgba(0, 184, 148, 0.3);
+}
+
+.time {
+  background: rgba(253, 121, 168, 0.3);
+}
+
+.strategy {
+  font-style: italic;
+  color: #74b9ff;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.key-topics {
+  margin-bottom: 15px;
+}
+
+.key-topics strong {
+  color: #74b9ff;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.topics-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.topic-tag {
+  background: rgba(0, 184, 148, 0.3);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.subject-tips {
+  margin-top: 15px;
+}
+
+.subject-tips strong {
+  color: #fd79a8;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.subject-tips ul {
+  list-style: none;
+  padding: 0;
+}
+
+.subject-tips li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  position: relative;
+  padding-left: 25px;
+}
+
+.subject-tips li::before {
+  content: "💡";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+}
+
+.books-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.book-category {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.book-category h4 {
+  color: #74b9ff;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.books-list {
+  display: grid;
+  gap: 12px;
+}
+
+.book-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  border-left: 4px solid #00b894;
+}
+
+.book-item h5 {
+  margin: 0 0 8px 0;
+  color: white;
+  font-size: 1rem;
+}
+
+.book-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.book-level {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.book-level.beginner {
+  background: rgba(39, 174, 96, 0.3);
+}
+
+.book-level.advanced,
+.book-level.all {
+  background: rgba(255, 165, 0, 0.3);
+}
+
+.book-level.expert {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+.book-level.foundation,
+.book-level.practice,
+.book-level.vocabulary,
+.book-level.current {
+  background: rgba(116, 185, 255, 0.3);
+}
+
+.book-rating {
+  color: #ffd700;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.resource-category {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.resource-category h4 {
+  color: #fd79a8;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.resource-type {
+  background: rgba(116, 185, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.resource-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-category li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  position: relative;
+  padding-left: 25px;
+}
+
+.resource-category li::before {
+  content: "🔗";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+}
+
+.mock-strategy {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.mock-schedule,
+.analysis-strategy,
+.test-types {
+  margin-bottom: 25px;
+}
+
+.mock-schedule h4,
+.analysis-strategy h4,
+.test-types h4 {
+  color: #74b9ff;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.mock-phase {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-left: 4px solid #fd79a8;
+}
+
+.mock-phase h5 {
+  color: #fd79a8;
+  margin-bottom: 8px;
+}
+
+.mock-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.mock-details span {
+  background: rgba(116, 185, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.mock-details p {
+  flex: 100%;
+  margin: 8px 0 0 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.analysis-strategy ul {
+  list-style: none;
+  padding: 0;
+}
+
+.analysis-strategy li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.analysis-strategy li::before {
+  content: "📊";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.test-types-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.test-type-tag {
+  background: rgba(0, 184, 148, 0.3);
+  padding: 8px 15px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.revision-techniques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.technique-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.technique-card h4 {
+  color: #fd79a8;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.technique-description {
+  font-style: italic;
+  color: #74b9ff;
+  margin-bottom: 12px;
+}
+
+.technique-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.implementation,
+.effectiveness {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.time-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.time-category {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.time-category h4 {
+  color: #74b9ff;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.time-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.time-category li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.time-category li::before {
+  content: "⏰";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.motivation-aspects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.motivation-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.motivation-card h4 {
+  color: #fd79a8;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.motivation-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.motivation-card li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.motivation-card li::before {
+  content: "💪";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.exam-phases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.exam-phase {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  border-top: 4px solid #00b894;
+}
+
+.exam-phase h4 {
+  color: #74b9ff;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.exam-phase ul {
+  list-style: none;
+  padding: 0;
+}
+
+.exam-phase li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.exam-phase li::before {
+  content: "✅";
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.errors-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.error-card {
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+  border-left: 4px solid #ff6b6b;
+}
+
+.error-card h4 {
+  color: #ff6b6b;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.error-impact {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.error-solution {
+  background: rgba(0, 184, 148, 0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .study-guide {
+    padding: 25px;
+  }
+  
+  .subjects-grid,
+  .books-categories,
+  .resources-grid,
+  .revision-techniques,
+  .time-categories,
+  .motivation-aspects,
+  .exam-phases,
+  .errors-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .phase-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .phase-commitment {
+    text-align: left;
+  }
+  
+  .mock-details {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .book-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
