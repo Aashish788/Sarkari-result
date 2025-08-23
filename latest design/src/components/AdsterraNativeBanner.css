@@ -1,0 +1,87 @@
+.adsterra-native-banner {
+  width: 100%;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ad-label {
+  font-size: 11px;
+  color: #6c757d;
+  text-align: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.ad-container {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 6px;
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .adsterra-native-banner {
+    margin: 15px 0;
+    padding: 12px;
+  }
+  
+  .ad-container {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .adsterra-native-banner {
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
+  .ad-container {
+    min-height: 180px;
+  }
+}
+
+/* Loading placeholder */
+.ad-container:empty::before {
+  content: "Loading Advertisement...";
+  color: #adb5bd;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Hover effects */
+.adsterra-native-banner:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .adsterra-native-banner {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .ad-container {
+    background: #1a202c;
+  }
+  
+  .ad-label {
+    color: #a0aec0;
+  }
+  
+  .ad-container:empty::before {
+    color: #718096;
+  }
+}

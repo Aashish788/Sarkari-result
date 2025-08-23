@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 import ResultAnalysis from './ResultAnalysis';
 import ContentEnhancer from './ContentEnhancer';
+import AdsterraNativeBanner from './AdsterraNativeBanner';
 
 const ResultDetails = () => {
   const { slug } = useParams();
@@ -146,6 +147,9 @@ const ResultDetails = () => {
           <li><strong>Result Date:</strong> {formatDateToDDMMYYYY(result.result_declared_date) || 'Will be updated'}</li>
         </ul>
       </div>
+
+      {/* Ad Banner after Important Dates */}
+      <AdsterraNativeBanner />
 
       {result.post_name && (
         <div className="job-section">

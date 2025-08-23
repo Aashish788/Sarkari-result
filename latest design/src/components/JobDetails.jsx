@@ -6,6 +6,7 @@ import JobAnalysis from './JobAnalysis';
 import ExamInsights from './ExamInsights';
 import StudyGuide from './StudyGuide';
 import ContentEnhancer from './ContentEnhancer';
+import AdsterraNativeBanner from './AdsterraNativeBanner';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -273,6 +274,9 @@ const JobDetails = () => {
           </table>
         </div>
       </div>
+
+      {/* First Ad Banner after Vacancy Details */}
+      <AdsterraNativeBanner />
 
       {job.selection_process && (
         <div className="job-section">

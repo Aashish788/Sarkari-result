@@ -8,6 +8,7 @@ import DocumentsSection from './DocumentsSection';
 import SarkariResultInfo from './SarkariResultInfo';
 import TopPagesTable from './TopPagesTable';
 import FAQ from './FAQ';
+import AdsterraNativeBanner from './AdsterraNativeBanner';
 
 const MainContent = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -71,8 +72,15 @@ const MainContent = () => {
         </div>
       )}
       
+      {/* Ad Banner between sections */}
+      <AdsterraNativeBanner />
+      
       {/* Additional content below the grid */}
       <SarkariResultInfo />
+      
+      {/* Another Ad Banner before FAQ */}
+      <AdsterraNativeBanner />
+      
       <TopPagesTable />
       <FAQ />
     </div>
