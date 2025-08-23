@@ -5,6 +5,7 @@ import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 import ResultAnalysis from './ResultAnalysis';
 import ContentEnhancer from './ContentEnhancer';
 import AdsterraNativeBanner from './AdsterraNativeBanner';
+import AdsterraBanner from './AdsterraBanner';
 
 const ResultDetails = () => {
   const { slug } = useParams();
@@ -238,6 +239,9 @@ const ResultDetails = () => {
         </div>
       </div>
 
+      {/* Inline Banner Ad (468x60) before Result Analysis */}
+      <AdsterraBanner style={{ maxWidth: 500, margin: '30px auto' }} />
+
       {/* Add comprehensive result analysis */}
       <ResultAnalysis result={result} />
 
@@ -258,4 +262,4 @@ const ResultDetails = () => {
   );
 };
 
-export default ResultDetails; 
+export default ResultDetails;

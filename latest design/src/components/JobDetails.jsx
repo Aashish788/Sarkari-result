@@ -7,6 +7,7 @@ import ExamInsights from './ExamInsights';
 import StudyGuide from './StudyGuide';
 import ContentEnhancer from './ContentEnhancer';
 import AdsterraNativeBanner from './AdsterraNativeBanner';
+import AdsterraBanner from './AdsterraBanner';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -292,6 +293,9 @@ const JobDetails = () => {
         </div>
       )}
 
+      {/* Inline Banner Ad (468x60) before Important Links */}
+      <AdsterraBanner style={{ maxWidth: 500, margin: '30px auto' }} />
+
       <div className="job-section">
         <h2>Important Links</h2>
         <div className="links-table">
@@ -395,4 +399,4 @@ const JobDetails = () => {
   );
 };
 
-export default JobDetails; 
+export default JobDetails;
