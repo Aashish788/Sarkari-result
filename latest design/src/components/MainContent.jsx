@@ -73,13 +73,13 @@ const MainContent = () => {
       )}
       
       {/* Ad Banner between sections */}
-      <AdsterraNativeBanner />
+      <AdsterraNativeBanner placement="home-mid" className="size-medium" />
       
       {/* Additional content below the grid */}
       <SarkariResultInfo />
       
       {/* Another Ad Banner before FAQ */}
-      <AdsterraNativeBanner />
+      <AdsterraNativeBanner placement="home-faq" className="size-medium" />
       
       <TopPagesTable />
       <FAQ />
@@ -87,4 +87,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent; 
+export default MainContent;

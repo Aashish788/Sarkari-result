@@ -20,14 +20,20 @@
 
 .ad-container {
   width: 100%;
-  min-height: 250px;
+  min-height: 120px; /* reduced to avoid large blank space before fill */
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
   border-radius: 6px;
   position: relative;
+  overflow: hidden;
 }
+
+/* Size variants if we wrap with a modifier class later */
+.adsterra-native-banner.size-small .ad-container { min-height: 70px; }
+.adsterra-native-banner.size-medium .ad-container { min-height: 120px; }
+.adsterra-native-banner.size-large .ad-container { min-height: 180px; }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -36,9 +42,7 @@
     padding: 12px;
   }
   
-  .ad-container {
-    min-height: 200px;
-  }
+  .ad-container { min-height: 100px; }
 }
 
 @media (max-width: 480px) {
@@ -47,9 +51,7 @@
     padding: 10px;
   }
   
-  .ad-container {
-    min-height: 180px;
-  }
+  .ad-container { min-height: 90px; }
 }
 
 /* Loading placeholder */
