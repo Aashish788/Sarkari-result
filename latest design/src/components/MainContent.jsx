@@ -9,6 +9,7 @@ import SarkariResultInfo from './SarkariResultInfo';
 import TopPagesTable from './TopPagesTable';
 import FAQ from './FAQ';
 import AdsterraNativeBanner from './AdsterraNativeBanner';
+import AdsterraDiagnostics from './AdsterraDiagnostics';
 
 const MainContent = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -74,6 +75,9 @@ const MainContent = () => {
       
       {/* Ad Banner between sections */}
       <AdsterraNativeBanner placement="home-mid" className="size-medium" />
+      
+      {/* Ad Diagnostics Tool */}
+      <AdsterraDiagnostics />
       
       {/* Additional content below the grid */}
       <SarkariResultInfo />
