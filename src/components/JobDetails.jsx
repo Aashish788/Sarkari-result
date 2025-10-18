@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
+import { InArticleAd, TopBannerAd, BottomAd } from './AdSenseAd';
+import { Helmet } from 'react-helmet-async';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -83,14 +85,56 @@ const JobDetails = () => {
 
   if (!job) return null;
 
+  // Generate rich content description
+  const contentDescription = `Complete information about ${job.title}. Important dates: Application starts ${formatDateToDDMMYYYY(job.apply_start_date) || 'Soon'}, Last date ${formatDateToDDMMYYYY(job.apply_end_date) || 'TBA'}. Total vacancies: ${job.total_posts || 'Multiple'}. Check eligibility, application process, selection procedure, and official links. Get latest updates on government job recruitment ${new Date().getFullYear()}.`;
+
   return (
-    <div className="job-details-container">
-      <h1 className="job-title">{job.title}</h1>
-      
-      <div className="post-meta">
-        <p>Post Date: {new Date(job.created_at).toLocaleDateString()}</p>
-        {job.post_time && <p>{job.post_time}</p>}
-      </div>
+    <>
+      <Helmet>
+        <title>{job.title} - Detailed Information | Sarkari Result</title>
+        <meta name="description" content={contentDescription} />
+        <meta name="keywords" content={`${job.title}, ${job.post_name || 'government job'}, recruitment ${new Date().getFullYear()}, vacancy, application form, eligibility criteria, selection process`} />
+        <meta property="og:title" content={job.title} />
+        <meta property="og:description" content={contentDescription} />
+        <meta property="og:type" content="article" />
+        <link rel="canonical" href={`https://thesarkariresult.info/jobs/${job.slug}`} />
+      </Helmet>
+
+      <div className="job-details-container">
+        {/* Top Banner Ad - Shows only on quality content */}
+        <TopBannerAd slot="top-banner-job-details" />
+
+        <article>
+          <header>
+            <h1 className="job-title">{job.title}</h1>
+            
+            <div className="post-meta">
+              <p>Post Date: {new Date(job.created_at).toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+              })}</p>
+              {job.post_time && <p>Posted on: {job.post_time}</p>}
+              <p>Category: Government Job Recruitment</p>
+            </div>
+
+            {/* Introduction Paragraph - Critical for AdSense */}
+            <div className="job-introduction">
+              <p>
+                Welcome to the detailed page for <strong>{job.title}</strong>. 
+                This page provides comprehensive information about the latest recruitment notification 
+                for {job.post_name || 'various posts'}. Candidates who are looking for government job 
+                opportunities can find all essential details including important dates, eligibility 
+                criteria, application process, selection procedure, and official links on this page.
+              </p>
+              <p>
+                The recruitment drive aims to fill {job.total_posts || 'multiple'} vacant positions. 
+                Eligible and interested candidates are advised to read all the information carefully 
+                before applying. All the important dates, educational qualifications, age limits, 
+                and other requirements are mentioned below in detail.
+              </p>
+            </div>
+          </header>
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>
@@ -371,7 +415,37 @@ const JobDetails = () => {
           <i className="fab fa-telegram"></i> Share on Telegram
         </a>
       </div>
-    </div>
+
+      {/* Bottom Ad - Shows after all content */}
+      <BottomAd slot="bottom-job-details" />
+
+      {/* Disclaimer Section - Adds more content */}
+      <div className="job-section disclaimer-section">
+        <h2>Important Information</h2>
+        <div className="disclaimer-content">
+          <p>
+            <strong>Disclaimer:</strong> The information provided on this page is based on the official 
+            notification released by the recruiting organization. We make every effort to ensure accuracy 
+            and timeliness of the information. However, candidates are strongly advised to verify all 
+            details from the official website before applying.
+          </p>
+          <p>
+            This website serves as an information portal for government job seekers and does not guarantee 
+            job placements. All applications must be submitted through the official channels only. We are 
+            not responsible for any errors or omissions. For the most accurate and up-to-date information, 
+            please refer to the official notification and website.
+          </p>
+          <p>
+            <strong>Stay Updated:</strong> Bookmark this page and visit regularly for updates. Share this 
+            information with friends who might be interested in this recruitment. Follow us for more 
+            government job notifications and exam updates.
+          </p>
+        </div>
+      </div>
+
+        </article>
+      </div>
+    </>
   );
 };
 

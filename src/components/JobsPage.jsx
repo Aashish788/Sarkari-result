@@ -71,15 +71,38 @@ const JobsPage = () => {
 
   return (
     <div className="page-container">
-      <h1 className="page-title">Latest Jobs</h1>
+      <h1 className="page-title">Latest Government Jobs {new Date().getFullYear()}</h1>
+      
+      {/* Rich Introduction Content for AdSense Compliance */}
+      <div className="page-introduction">
+        <p>
+          Welcome to the latest government jobs section. Here you'll find comprehensive information 
+          about all new and upcoming Sarkari Naukri opportunities across India. We regularly update 
+          this page with notifications from central government, state governments, public sector 
+          undertakings (PSUs), banks, railways, defense, police, teaching, and many other sectors.
+        </p>
+        <p>
+          Whether you're looking for 10th pass jobs, 12th pass positions, graduate opportunities, 
+          or postgraduate vacancies, this page serves as your one-stop destination for all government 
+          employment news. Each job listing includes detailed information about eligibility criteria, 
+          important dates, application process, selection procedure, and official links.
+        </p>
+        <p>
+          <strong>How to Apply:</strong> Click on any job card below to view complete details. 
+          Make sure to check eligibility criteria and important dates before applying. All applications 
+          must be submitted through official websites only. Bookmark this page to stay updated with 
+          the latest job notifications.
+        </p>
+      </div>
       
       <div className="search-container">
         <input
           type="text"
-          placeholder="Search jobs..."
+          placeholder="Search jobs by name, department, or qualification..."
           value={search}
           onChange={handleSearchChange}
           className="search-input"
+          aria-label="Search government jobs"
         />
       </div>
 
@@ -94,6 +117,19 @@ const JobsPage = () => {
           <div className="no-results-icon">💼</div>
           <h3>No jobs found</h3>
           <p>{search ? `No jobs match "${search}"` : 'No jobs available at the moment'}</p>
+          <div className="no-results-help">
+            <h4>Search Tips:</h4>
+            <ul>
+              <li>Try different keywords or shorter search terms</li>
+              <li>Check for spelling mistakes</li>
+              <li>Browse all categories using the navigation menu</li>
+              <li>Visit our homepage for the latest updates</li>
+            </ul>
+            <p>
+              New government job notifications are added regularly. Please check back soon or 
+              enable push notifications to get instant updates about new job postings.
+            </p>
+          </div>
         </div>
       ) : (
         <div className="items-grid">

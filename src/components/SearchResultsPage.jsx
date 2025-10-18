@@ -229,6 +229,48 @@ const SearchResultsPage = () => {
           <div className="search-welcome">
             <h2>🔍 Universal Search</h2>
             <p>Search across all categories including jobs, results, admit cards, answer keys, admissions, documents, and syllabus.</p>
+            
+            {/* Rich Content for AdSense Compliance */}
+            <div className="search-description">
+              <h3>How to Use Search</h3>
+              <p>
+                Our advanced search feature allows you to quickly find relevant government job 
+                notifications, exam results, admit cards, answer keys, admission notices, and important 
+                documents. Simply enter keywords related to what you're looking for in the search box above.
+              </p>
+              
+              <h3>Search Tips</h3>
+              <ul>
+                <li><strong>Use Specific Keywords:</strong> Try searching for specific exam names, department names, or post titles for better results.</li>
+                <li><strong>Filter by Category:</strong> Use the category filters below to narrow down your search to specific types of content.</li>
+                <li><strong>Check Spelling:</strong> Make sure your keywords are spelled correctly for accurate results.</li>
+                <li><strong>Try Different Terms:</strong> If you don't find what you're looking for, try using synonyms or related terms.</li>
+              </ul>
+
+              <h3>What You Can Find</h3>
+              <p>
+                Our database contains thousands of entries covering all major government recruitment 
+                notifications, exam results, admit cards, and more. Whether you're looking for central 
+                government jobs, state government positions, public sector undertakings (PSUs), banking 
+                jobs, railway recruitment, defense services, or any other government opportunity, you'll 
+                find comprehensive information here.
+              </p>
+
+              <h3>Popular Searches</h3>
+              <p>
+                Some of the most searched categories include: SSC (Staff Selection Commission), UPSC 
+                (Union Public Service Commission), Railway Recruitment, Banking Exams, Police Recruitment, 
+                Teaching Jobs, Medical & Healthcare Jobs, Engineering Jobs, and State Public Service 
+                Commissions. We update our database daily with the latest notifications and results.
+              </p>
+
+              <h3>Stay Updated</h3>
+              <p>
+                Bookmark this page and visit regularly to stay updated with the latest government job 
+                opportunities. You can also enable push notifications to receive instant alerts about 
+                new job postings, results, and admit cards relevant to your interests.
+              </p>
+            </div>
           </div>
           
           <div className="search-categories-grid">
@@ -243,8 +285,39 @@ const SearchResultsPage = () => {
                   <div className="category-icon-large">{category.icon}</div>
                   <h3>{category.label}</h3>
                   <p>Browse all {category.label.toLowerCase()}</p>
+                  <p className="category-description">
+                    {key === 'jobs' && 'Latest government job notifications and recruitment updates'}
+                    {key === 'results' && 'Exam results, merit lists, and scorecard information'}
+                    {key === 'admit_cards' && 'Download hall tickets and call letters for exams'}
+                    {key === 'answer_keys' && 'Official answer keys and solution papers'}
+                    {key === 'admissions' && 'College and university admission notifications'}
+                    {key === 'documents' && 'Important forms, certificates, and documentation'}
+                    {key === 'syllabus' && 'Exam syllabus, pattern, and preparation materials'}
+                  </p>
                 </Link>
               ))}
+          </div>
+
+          <div className="search-features">
+            <h3>Why Use Our Search?</h3>
+            <div className="features-grid">
+              <div className="feature-item">
+                <h4>⚡ Fast & Accurate</h4>
+                <p>Get instant search results with high accuracy from our comprehensive database.</p>
+              </div>
+              <div className="feature-item">
+                <h4>📱 Mobile Friendly</h4>
+                <p>Search seamlessly on any device - desktop, tablet, or mobile phone.</p>
+              </div>
+              <div className="feature-item">
+                <h4>🔄 Always Updated</h4>
+                <p>Our database is updated daily with the latest information.</p>
+              </div>
+              <div className="feature-item">
+                <h4>🎯 Smart Filters</h4>
+                <p>Filter results by category to find exactly what you need.</p>
+              </div>
+            </div>
           </div>
         </div>
       )}

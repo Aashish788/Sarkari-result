@@ -34,6 +34,7 @@ import DisclaimerPage from './components/DisclaimerPage';
 import SyllabusPage from './components/SyllabusPage';
 import SearchResultsPage from './components/SearchResultsPage';
 import './App.css';
+import './components/ContentQuality.css';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { checkForUpdates } from './utils/versionCheck';
