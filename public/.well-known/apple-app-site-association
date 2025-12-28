@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "YOUR_APPLE_TEAM_ID.com.Sarkaribuddy.app",
+        "appID": "YOUR_APPLE_TEAM_ID.com.sarkaribuddy.app",
         "paths": ["/jobs/*", "/results/*", "/admit-cards/*", "/admissions/*", "/answer-keys/*", "/documents/*"]
       }
     ]

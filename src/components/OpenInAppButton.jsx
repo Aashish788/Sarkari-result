@@ -20,7 +20,7 @@ const OpenInAppButton = ({ slug, type }) => {
     setTimeout(() => {
       // We check if the page is still visible. If the app opened, the page might be hidden.
       if (!document.hidden) {
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.Sarkaribuddy.app';
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.sarkaribuddy.app';
       }
     }, 2500);
   };
