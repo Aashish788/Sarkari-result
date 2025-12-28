@@ -18,9 +18,21 @@ const OpenInAppButton = ({ slug, type }) => {
     
     // Fallback to Play Store if the app doesn't open
     setTimeout(() => {
-      // We check if the page is still visible. If the app opened, the page might be hidden.
+      // Check again if we're still on the web page
       if (!document.hidden) {
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.sarkaribuddy.app';
+        // Use intent URL for Android - this is much more reliable for triggering Play Store
+        const playStoreUrl = 'market://details?id=com.sarkaribuddy.app';
+        const fallbackUrl = 'https://play.google.com/store/apps/details?id=com.sarkaribuddy.app';
+        
+        // Try market protocol first (opens Play Store app directly)
+        window.location.href = playStoreUrl;
+        
+        // Final fallback to web play store if market protocol fails
+        setTimeout(() => {
+          if (!document.hidden) {
+            window.location.href = fallbackUrl;
+          }
+        }, 500);
       }
     }, 2500);
   };
