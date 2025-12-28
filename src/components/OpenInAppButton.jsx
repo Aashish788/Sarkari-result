@@ -21,8 +21,8 @@ const OpenInAppButton = ({ slug, type }) => {
       // Check again if we're still on the web page
       if (!document.hidden) {
         // Use intent URL for Android - this is much more reliable for triggering Play Store
-        const playStoreUrl = 'market://details?id=com.sarkaribuddy.app';
-        const fallbackUrl = 'https://play.google.com/store/apps/details?id=com.sarkaribuddy.app';
+        const playStoreUrl = 'market://details?id=com.Sarkaribuddy.app';
+        const fallbackUrl = 'https://play.google.com/store/apps/details?id=com.Sarkaribuddy.app';
         
         // Try market protocol first (opens Play Store app directly)
         window.location.href = playStoreUrl;

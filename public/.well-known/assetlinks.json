@@ -1,12 +1,5 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.Sarkaribuddy.app",
-      "sha256_cert_fingerprints": [
-        "6C:71:88:99:1A:A2:5F:BF:6B:2E:D1:99:59:10:C6:70:69:B3:6C:76:B4:E2:BD:9E:3D:2F:E4:9B:BA:C2:A4:A8"
-      ]
-    }
-  }
-]
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.Sarkaribuddy.app",
+               "sha256_cert_fingerprints": ["6C:71:88:99:1A:A2:5F:BF:6B:2E:D1:99:59:10:C6:70:69:B3:6C:76:B4:E2:BD:9E:3D:2F:E4:9B:BA:C2:A4:A8"] }
+}]

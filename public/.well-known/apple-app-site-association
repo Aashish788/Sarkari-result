@@ -3,10 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appID": "YOUR_APPLE_TEAM_ID.com.sarkaribuddy.app",
-        "paths": ["/jobs/*", "/results/*", "/admit-cards/*", "/admissions/*", "/answer-keys/*", "/documents/*"]
+        "appID": "YOUR_APPLE_TEAM_ID.com.Sarkaribuddy.app",
+        "paths": [
+          "/jobs/*", "/results/*", "/admit-cards/*", "/admissions/*", "/answer-keys/*", "/documents/*",
+          "/job/*", "/result/*", "/admit-card/*", "/admission/*", "/answer-key/*", "/document/*"
+        ]
       }
     ]
   }
 }
-
