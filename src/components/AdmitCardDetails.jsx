@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY } from '../utils/dateUtils';
+import OpenInAppButton from './OpenInAppButton';
 
 const AdmitCardDetails = () => {
   const { slug } = useParams();
@@ -80,6 +81,8 @@ const AdmitCardDetails = () => {
         <p>Post Date: {new Date(admitCard.created_at).toLocaleDateString()}</p>
         {admitCard.post_time && <p>{admitCard.post_time}</p>}
       </div>
+
+      <OpenInAppButton slug={admitCard.slug} type="admit-card" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

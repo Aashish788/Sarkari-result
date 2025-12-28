@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import OpenInAppButton from './OpenInAppButton';
 
 const DocumentDetails = () => {
   const { slug } = useParams();
@@ -79,6 +80,8 @@ const DocumentDetails = () => {
         <p>Post Date: {new Date(document.created_at).toLocaleDateString()}</p>
         {document.post_time && <p>{document.post_time}</p>}
       </div>
+
+      <OpenInAppButton slug={document.slug} type="document" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

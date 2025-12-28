@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY } from '../utils/dateUtils';
+import OpenInAppButton from './OpenInAppButton';
 
 const AnswerKeyDetails = () => {
   const { slug } = useParams();
@@ -80,6 +81,8 @@ const AnswerKeyDetails = () => {
         <p>Post Date: {new Date(answerKey.created_at).toLocaleDateString()}</p>
         {answerKey.post_time && <p>{answerKey.post_time}</p>}
       </div>
+
+      <OpenInAppButton slug={answerKey.slug} type="answer-key" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

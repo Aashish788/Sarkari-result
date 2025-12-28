@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
+import OpenInAppButton from './OpenInAppButton';
 
 const ResultDetails = () => {
   const { slug } = useParams();
@@ -80,6 +81,8 @@ const ResultDetails = () => {
         <p>Post Date: {new Date(result.created_at).toLocaleDateString()}</p>
         {result.post_time && <p>{result.post_time}</p>}
       </div>
+
+      <OpenInAppButton slug={result.slug} type="result" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

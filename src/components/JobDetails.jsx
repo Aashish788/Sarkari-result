@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 import { InArticleAd, TopBannerAd, BottomAd } from './AdSenseAd';
 import { Helmet } from 'react-helmet-async';
+import OpenInAppButton from './OpenInAppButton';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -135,6 +136,8 @@ const JobDetails = () => {
               </p>
             </div>
           </header>
+
+          <OpenInAppButton slug={job.slug} type="job" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>
