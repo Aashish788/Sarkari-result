@@ -4,7 +4,7 @@ import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 import { InArticleAd, TopBannerAd, BottomAd } from './AdSenseAd';
 import { Helmet } from 'react-helmet-async';
-import OpenInAppButton from './OpenInAppButton';
+import AppRedirectHandler from './OpenInAppButton';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -25,22 +25,36 @@ const JobDetails = () => {
       }
 
       setLoading(true);
-      const { data, error } = await supabase
+      
+      // First try to find by slug
+      let { data, error } = await supabase
         .from('jobs')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      if (error) {
+      // If not found by slug, try by ID (for app deep links)
+      if (error || !data) {
+        const idResult = await supabase
+          .from('jobs')
+          .select('*')
+          .eq('id', slug)
+          .single();
+        
+        if (!idResult.error && idResult.data) {
+          data = idResult.data;
+          error = null;
+        }
+      }
+
+      if (error || !data) {
         console.error('Error fetching job:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      if (data) {
-        setJob(data);
-        jobCache.set(slug, data); // Cache the result
-      }
+      setJob(data);
+      jobCache.set(slug, data); // Cache the result
       setLoading(false);
     };
 

@@ -13,21 +13,35 @@ const AdmissionDetails = () => {
   useEffect(() => {
     const fetchAdmissionDetails = async () => {
       setLoading(true);
-      const { data, error } = await supabase
+      
+      // First try to find by slug
+      let { data, error } = await supabase
         .from('admissions')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      if (error) {
+      // If not found by slug, try by ID (for app deep links)
+      if (error || !data) {
+        const idResult = await supabase
+          .from('admissions')
+          .select('*')
+          .eq('id', slug)
+          .single();
+        
+        if (!idResult.error && idResult.data) {
+          data = idResult.data;
+          error = null;
+        }
+      }
+
+      if (error || !data) {
         console.error('Error fetching admission:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      if (data) {
-        setAdmission(data);
-      }
+      setAdmission(data);
       setLoading(false);
     };
 

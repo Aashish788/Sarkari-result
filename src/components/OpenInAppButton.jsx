@@ -1,53 +1,37 @@
-import React from 'react';
+import { useEffect } from 'react';
 
-const OpenInAppButton = ({ slug, type }) => {
-  const handleOpenInApp = () => {
-    // Construct the deep link URL based on type
-    let path = '';
-    if (type === 'job') path = `/jobs/${slug}`;
-    else if (type === 'result') path = `/results/${slug}`;
-    else if (type === 'admit-card') path = `/admit-cards/${slug}`;
-    else if (type === 'admission') path = `/admissions/${slug}`;
-    else if (type === 'answer-key') path = `/answer-keys/${slug}`;
-    else if (type === 'document') path = `/documents/${slug}`;
-    
-    const url = `https://thesarkariresult.info${path}`;
-    
-    // Try to open the link. If app is installed, it should intercept.
-    window.location.href = url;
-    
-    // Fallback to Play Store if the app doesn't open
-    setTimeout(() => {
-      // Check again if we're still on the web page
-      if (!document.hidden) {
-        // Use intent URL for Android - this is much more reliable for triggering Play Store
-        const playStoreUrl = 'market://details?id=com.Sarkaribuddy.app';
-        const fallbackUrl = 'https://play.google.com/store/apps/details?id=com.Sarkaribuddy.app';
-        
-        // Try market protocol first (opens Play Store app directly)
-        window.location.href = playStoreUrl;
-        
-        // Final fallback to web play store if market protocol fails
-        setTimeout(() => {
-          if (!document.hidden) {
-            window.location.href = fallbackUrl;
-          }
-        }, 500);
-      }
-    }, 2500);
-  };
+const AppRedirectHandler = ({ slug, type }) => {
+  useEffect(() => {
+    // Construct app-specific intent URL for instant opening
+    let intentUrl = '';
+    if (type === 'job') intentUrl = `intent://job/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
+    else if (type === 'result') intentUrl = `intent://result/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
+    else if (type === 'admit-card') intentUrl = `intent://admit-card/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
+    else if (type === 'admission') intentUrl = `intent://admission/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
+    else if (type === 'answer-key') intentUrl = `intent://answer-key/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
+    else if (type === 'document') intentUrl = `intent://document/${slug}#Intent;scheme=https;package=com.Sarkaribuddy.app;end`;
 
-  return (
-    <div className="open-in-app-container" style={{ textAlign: 'center', margin: '20px 0' }}>
-      <button onClick={handleOpenInApp} className="open-in-app-btn">
-        <i className="fas fa-mobile-alt"></i> Open in App
-      </button>
-      <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '5px' }}>
-        For a better experience, try our official Android App
-      </p>
-    </div>
-  );
+    // Try to open app instantly using Android Intent
+    window.location.href = intentUrl;
+
+    // If app doesn't open within 1 second, redirect to Play Store
+    const timeoutId = setTimeout(() => {
+      // Use market protocol for direct Play Store app opening
+      window.location.href = 'market://details?id=com.Sarkaribuddy.app';
+
+      // Backup fallback to web Play Store
+      setTimeout(() => {
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.Sarkaribuddy.app';
+      }, 500);
+    }, 1000); // Reduced from 2.5s to 1s for faster response
+
+    // Cleanup timeout if component unmounts
+    return () => clearTimeout(timeoutId);
+  }, [slug, type]);
+
+  // Return null - this component only handles redirection, no UI
+  return null;
 };
 
-export default OpenInAppButton;
+export default AppRedirectHandler;
 

@@ -13,21 +13,35 @@ const ResultDetails = () => {
   useEffect(() => {
     const fetchResultDetails = async () => {
       setLoading(true);
-      const { data, error } = await supabase
+      
+      // First try to find by slug
+      let { data, error } = await supabase
         .from('results')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      if (error) {
+      // If not found by slug, try by ID (for app deep links)
+      if (error || !data) {
+        const idResult = await supabase
+          .from('results')
+          .select('*')
+          .eq('id', slug)
+          .single();
+        
+        if (!idResult.error && idResult.data) {
+          data = idResult.data;
+          error = null;
+        }
+      }
+
+      if (error || !data) {
         console.error('Error fetching result:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      if (data) {
-        setResult(data);
-      }
+      setResult(data);
       setLoading(false);
     };
 

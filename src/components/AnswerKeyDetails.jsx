@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY } from '../utils/dateUtils';
-import OpenInAppButton from './OpenInAppButton';
+import AppRedirectHandler from './OpenInAppButton';
 
 const AnswerKeyDetails = () => {
   const { slug } = useParams();
@@ -13,21 +13,35 @@ const AnswerKeyDetails = () => {
   useEffect(() => {
     const fetchAnswerKeyDetails = async () => {
       setLoading(true);
-      const { data, error } = await supabase
+      
+      // First try to find by slug
+      let { data, error } = await supabase
         .from('answer_keys')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      if (error) {
+      // If not found by slug, try by ID (for app deep links)
+      if (error || !data) {
+        const idResult = await supabase
+          .from('answer_keys')
+          .select('*')
+          .eq('id', slug)
+          .single();
+        
+        if (!idResult.error && idResult.data) {
+          data = idResult.data;
+          error = null;
+        }
+      }
+
+      if (error || !data) {
         console.error('Error fetching answer key:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      if (data) {
-        setAnswerKey(data);
-      }
+      setAnswerKey(data);
       setLoading(false);
     };
 
