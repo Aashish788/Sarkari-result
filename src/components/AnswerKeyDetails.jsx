@@ -96,7 +96,7 @@ const AnswerKeyDetails = () => {
         {answerKey.post_time && <p>{answerKey.post_time}</p>}
       </div>
 
-      <OpenInAppButton slug={answerKey.slug} type="answer-key" />
+      <AppRedirectHandler slug={answerKey.slug} type="answer-key" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

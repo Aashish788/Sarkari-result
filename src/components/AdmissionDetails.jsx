@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
-import OpenInAppButton from './OpenInAppButton';
+import AppRedirectHandler from './OpenInAppButton';
 
 const AdmissionDetails = () => {
   const { slug } = useParams();
@@ -96,7 +96,7 @@ const AdmissionDetails = () => {
         {admission.post_time && <p>{admission.post_time}</p>}
       </div>
 
-      <OpenInAppButton slug={admission.slug} type="admission" />
+      <AppRedirectHandler slug={admission.slug} type="admission" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

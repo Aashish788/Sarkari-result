@@ -151,7 +151,7 @@ const JobDetails = () => {
             </div>
           </header>
 
-          <OpenInAppButton slug={job.slug} type="job" />
+          <AppRedirectHandler slug={job.slug} type="job" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>
