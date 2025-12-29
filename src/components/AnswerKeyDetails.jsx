@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY } from '../utils/dateUtils';
-import AppRedirectHandler from './OpenInAppButton';
 
 const AnswerKeyDetails = () => {
   const { slug } = useParams();
@@ -13,35 +12,21 @@ const AnswerKeyDetails = () => {
   useEffect(() => {
     const fetchAnswerKeyDetails = async () => {
       setLoading(true);
-      
-      // First try to find by slug
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('answer_keys')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      // If not found by slug, try by ID (for app deep links)
-      if (error || !data) {
-        const idResult = await supabase
-          .from('answer_keys')
-          .select('*')
-          .eq('id', slug)
-          .single();
-        
-        if (!idResult.error && idResult.data) {
-          data = idResult.data;
-          error = null;
-        }
-      }
-
-      if (error || !data) {
+      if (error) {
         console.error('Error fetching answer key:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      setAnswerKey(data);
+      if (data) {
+        setAnswerKey(data);
+      }
       setLoading(false);
     };
 
@@ -95,8 +80,6 @@ const AnswerKeyDetails = () => {
         <p>Post Date: {new Date(answerKey.created_at).toLocaleDateString()}</p>
         {answerKey.post_time && <p>{answerKey.post_time}</p>}
       </div>
-
-      <AppRedirectHandler slug={answerKey.slug} type="answer-key" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

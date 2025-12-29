@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
-import AppRedirectHandler from './OpenInAppButton';
 
 const AdmissionDetails = () => {
   const { slug } = useParams();
@@ -13,35 +12,21 @@ const AdmissionDetails = () => {
   useEffect(() => {
     const fetchAdmissionDetails = async () => {
       setLoading(true);
-      
-      // First try to find by slug
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('admissions')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      // If not found by slug, try by ID (for app deep links)
-      if (error || !data) {
-        const idResult = await supabase
-          .from('admissions')
-          .select('*')
-          .eq('id', slug)
-          .single();
-        
-        if (!idResult.error && idResult.data) {
-          data = idResult.data;
-          error = null;
-        }
-      }
-
-      if (error || !data) {
+      if (error) {
         console.error('Error fetching admission:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      setAdmission(data);
+      if (data) {
+        setAdmission(data);
+      }
       setLoading(false);
     };
 
@@ -95,8 +80,6 @@ const AdmissionDetails = () => {
         <p>Post Date: {new Date(admission.created_at).toLocaleDateString()}</p>
         {admission.post_time && <p>{admission.post_time}</p>}
       </div>
-
-      <AppRedirectHandler slug={admission.slug} type="admission" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

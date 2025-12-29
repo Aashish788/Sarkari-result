@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY } from '../utils/dateUtils';
-import AppRedirectHandler from './OpenInAppButton';
 
 const AdmitCardDetails = () => {
   const { slug } = useParams();
@@ -13,35 +12,21 @@ const AdmitCardDetails = () => {
   useEffect(() => {
     const fetchAdmitCardDetails = async () => {
       setLoading(true);
-      
-      // First try to find by slug
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('admit_cards')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      // If not found by slug, try by ID (for app deep links)
-      if (error || !data) {
-        const idResult = await supabase
-          .from('admit_cards')
-          .select('*')
-          .eq('id', slug)
-          .single();
-        
-        if (!idResult.error && idResult.data) {
-          data = idResult.data;
-          error = null;
-        }
-      }
-
-      if (error || !data) {
+      if (error) {
         console.error('Error fetching admit card:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      setAdmitCard(data);
+      if (data) {
+        setAdmitCard(data);
+      }
       setLoading(false);
     };
 
@@ -95,8 +80,6 @@ const AdmitCardDetails = () => {
         <p>Post Date: {new Date(admitCard.created_at).toLocaleDateString()}</p>
         {admitCard.post_time && <p>{admitCard.post_time}</p>}
       </div>
-
-      <AppRedirectHandler slug={admitCard.slug} type="admit-card" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

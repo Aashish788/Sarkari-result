@@ -343,19 +343,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/job/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <JobDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
                   path="/results"
                   element={
                     <>
@@ -379,19 +366,6 @@ function App() {
                 />
                 <Route
                   path="/results/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <ResultDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
-                  path="/result/:slug"
                   element={
                     <>
                       <PWAStatus />
@@ -439,19 +413,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/admit-card/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <AdmitCardDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
                   path="/answer-key"
                   element={
                     <>
@@ -487,19 +448,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/answer-key/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <AnswerKeyDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
                   path="/admission"
                   element={
                     <>
@@ -523,19 +471,6 @@ function App() {
                 />
                 <Route
                   path="/admissions/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <AdmissionDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
-                  path="/admission/:slug"
                   element={
                     <>
                       <PWAStatus />
@@ -593,19 +528,6 @@ function App() {
                 />
                 <Route
                   path="/documents/:slug"
-                  element={
-                    <>
-                      <PWAStatus />
-                      <Header />
-                      <Navigation />
-                      <DocumentDetails />
-                      <Footer />
-                      <PWAInstallButton />
-                    </>
-                  }
-                />
-                <Route
-                  path="/document/:slug"
                   element={
                     <>
                       <PWAStatus />

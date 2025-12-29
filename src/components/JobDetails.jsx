@@ -4,7 +4,6 @@ import { supabase } from '../supabaseClient';
 import { formatDateToDDMMYYYY, getApplicationStatus } from '../utils/dateUtils';
 import { InArticleAd, TopBannerAd, BottomAd } from './AdSenseAd';
 import { Helmet } from 'react-helmet-async';
-import AppRedirectHandler from './OpenInAppButton';
 
 // Import the jobCache from LatestJobsSection
 const jobCache = new Map();
@@ -25,36 +24,22 @@ const JobDetails = () => {
       }
 
       setLoading(true);
-      
-      // First try to find by slug
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('jobs')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      // If not found by slug, try by ID (for app deep links)
-      if (error || !data) {
-        const idResult = await supabase
-          .from('jobs')
-          .select('*')
-          .eq('id', slug)
-          .single();
-        
-        if (!idResult.error && idResult.data) {
-          data = idResult.data;
-          error = null;
-        }
-      }
-
-      if (error || !data) {
+      if (error) {
         console.error('Error fetching job:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      setJob(data);
-      jobCache.set(slug, data); // Cache the result
+      if (data) {
+        setJob(data);
+        jobCache.set(slug, data); // Cache the result
+      }
       setLoading(false);
     };
 
@@ -150,8 +135,6 @@ const JobDetails = () => {
               </p>
             </div>
           </header>
-
-          <AppRedirectHandler slug={job.slug} type="job" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>

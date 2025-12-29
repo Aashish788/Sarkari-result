@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import AppRedirectHandler from './OpenInAppButton';
 
 const DocumentDetails = () => {
   const { slug } = useParams();
@@ -12,35 +11,21 @@ const DocumentDetails = () => {
   useEffect(() => {
     const fetchDocumentDetails = async () => {
       setLoading(true);
-      
-      // First try to find by slug
-      let { data, error } = await supabase
+      const { data, error } = await supabase
         .from('documents')
         .select('*')
         .eq('slug', slug)
         .single();
 
-      // If not found by slug, try by ID (for app deep links)
-      if (error || !data) {
-        const idResult = await supabase
-          .from('documents')
-          .select('*')
-          .eq('id', slug)
-          .single();
-        
-        if (!idResult.error && idResult.data) {
-          data = idResult.data;
-          error = null;
-        }
-      }
-
-      if (error || !data) {
+      if (error) {
         console.error('Error fetching document:', error);
         navigate('/'); // Redirect to home on error
         return;
       }
 
-      setDocument(data);
+      if (data) {
+        setDocument(data);
+      }
       setLoading(false);
     };
 
@@ -94,8 +79,6 @@ const DocumentDetails = () => {
         <p>Post Date: {new Date(document.created_at).toLocaleDateString()}</p>
         {document.post_time && <p>{document.post_time}</p>}
       </div>
-
-      <AppRedirectHandler slug={document.slug} type="document" />
 
       <div className="download-buttons">
         <a href="#" className="download-btn" onClick={(e) => { e.preventDefault(); handleShare('whatsapp'); }}>
