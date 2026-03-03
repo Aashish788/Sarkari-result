@@ -1,5 +1,9 @@
 {
   "buildCommand": "CI=false npm run build",
+  "rewrites": [
+    { "source": "/job/:id", "destination": "/job.html" },
+    { "source": "/((?!\\.well-known/).)*", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/.well-known/(.*)",
@@ -8,9 +12,5 @@
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/job/:id", "destination": "/job.html" },
-    { "source": "/((?!\\.well-known).*)", "destination": "/index.html" }
   ]
 }
