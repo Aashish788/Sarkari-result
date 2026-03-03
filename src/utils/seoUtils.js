@@ -252,7 +252,7 @@ export const seoUtils = {
 
   // Validate URL structure for SEO
   validateUrl: (url) => {
-    const seoFriendlyPattern = /^[a-z0-9-\/]+$/;
+    const seoFriendlyPattern = /^[a-z0-9-/]+$/;
     return seoFriendlyPattern.test(url);
   }
 };
@@ -295,7 +295,7 @@ export const commonFAQs = {
   ]
 };
 
-export default {
+const seoUtilsExports = {
   seoConfig,
   generateTitle,
   generateDescription,
@@ -308,3 +308,4 @@ export default {
   seoUtils,
   commonFAQs
 };
+export default seoUtilsExports;

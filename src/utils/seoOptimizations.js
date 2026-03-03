@@ -1,5 +1,3 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
 import { seoUtils } from '../utils/seoUtils.js';
 
 // Generate XML Sitemap
@@ -312,7 +310,7 @@ export const contentOptimization = {
   }
 };
 
-export default {
+const seoOptimizations = {
   generateSitemap,
   generateRobotsTxt,
   generateHomepageStructuredData,
@@ -320,3 +318,4 @@ export default {
   socialOptimization,
   contentOptimization
 };
+export default seoOptimizations;

@@ -28,18 +28,6 @@ const AD_BLACKLIST = [
   '/offline',
 ];
 
-// Content quality indicators
-const QUALITY_INDICATORS = {
-  hasHeadings: false,
-  hasStructuredData: false,
-  hasImages: false,
-  hasLists: false,
-  hasLinks: false,
-  hasMetadata: false,
-  isComplete: false,
-  isUnderConstruction: false,
-};
-
 /**
  * Check if current page is eligible for ads
  */
@@ -78,7 +66,6 @@ export function analyzeContentQuality() {
   }
 
   const text = content.textContent || '';
-  const html = content.innerHTML || '';
   
   // Word count analysis
   const words = text.trim().split(/\s+/).filter(word => word.length > 2);
@@ -90,7 +77,6 @@ export function analyzeContentQuality() {
   
   // Paragraph analysis
   const paragraphs = content.querySelectorAll('p, .content-section, .job-section, .info-table tr');
-  const paragraphCount = paragraphs.length;
   
   // Calculate substantial paragraph count (paragraphs with meaningful content)
   const substantialParagraphs = Array.from(paragraphs).filter(p => {
@@ -105,10 +91,6 @@ export function analyzeContentQuality() {
   
   // Links analysis
   const links = content.querySelectorAll('a[href]');
-  const internalLinks = Array.from(links).filter(a => {
-    const href = a.getAttribute('href');
-    return href && !href.startsWith('http') && !href.startsWith('//');
-  });
   const hasLinks = links.length >= CONTENT_REQUIREMENTS.MIN_LINKS;
   
   // Image analysis
@@ -414,7 +396,7 @@ export function getAdPlacementRecommendations() {
   return recommendations;
 }
 
-export default {
+const adsenseCompliance = {
   isPageEligibleForAds,
   analyzeContentQuality,
   initializeAdSense,
@@ -422,3 +404,4 @@ export default {
   checkPageCompliance,
   getAdPlacementRecommendations,
 };
+export default adsenseCompliance;
