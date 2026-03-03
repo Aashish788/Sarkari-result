@@ -7,9 +7,9 @@ const TopPagesTable = () => {
       <table className="info-table">
         <tbody>
           <tr>
-            <td><a href="#">Bharat Result</a></td>
-            <td><a href="#">Up Police Result</a></td>
-            <td><a href="#">Bihar Police Result</a></td>
+            <td><a href="/search?q=Bharat%20Result">Bharat Result</a></td>
+            <td><a href="/search?q=Up%20Police%20Result">Up Police Result</a></td>
+            <td><a href="/search?q=Bihar%20Police%20Result">Bihar Police Result</a></td>
           </tr>
           <tr>
             <td>Sarkari Exam</td>
@@ -17,8 +17,8 @@ const TopPagesTable = () => {
             <td>Sarkari Result Ntpc</td>
           </tr>
           <tr>
-            <td><a href="#">Sarkari Result 2025</a></td>
-            <td><a href="#">Sarkari result</a></td>
+            <td><a href="/search?q=Sarkari%20Result%202025">Sarkari Result 2025</a></td>
+            <td><a href="/search?q=Sarkari%20result">Sarkari result</a></td>
             <td>Sarkari</td>
           </tr>
           <tr>
@@ -28,7 +28,7 @@ const TopPagesTable = () => {
           </tr>
           <tr>
             <td>Sarkari Result 10+2</td>
-            <td><a href="#">Sarkariresult</a></td>
+            <td><a href="/search?q=Sarkariresult">Sarkariresult</a></td>
             <td>Sarkari Result SSC</td>
           </tr>
         </tbody>

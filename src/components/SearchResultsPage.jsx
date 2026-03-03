@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { globalSearch, SEARCH_CATEGORIES } from '../services/searchService';
 import SearchBox from './SearchBox';
@@ -14,15 +14,15 @@ const SearchResultsPage = () => {
   const navigate = useNavigate();
   
   // Get search query from URL
-  const getSearchQuery = () => {
+  const getSearchQuery = useCallback(() => {
     const urlParams = new URLSearchParams(location.search);
     return urlParams.get('q') || '';
-  };
+  }, [location.search]);
 
   const [query, setQuery] = useState(getSearchQuery());
 
   // Handle search
-  const handleSearch = async (searchQuery) => {
+  const handleSearch = useCallback(async (searchQuery) => {
     if (!searchQuery.trim()) {
       setResults([]);
       setCategorizedResults({});
@@ -47,7 +47,7 @@ const SearchResultsPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory]);
 
   // Update search when URL changes
   useEffect(() => {
@@ -56,24 +56,7 @@ const SearchResultsPage = () => {
     if (searchQuery) {
       handleSearch(searchQuery);
     }
-  }, [location.search, selectedCategory]);
-
-  // Handle search input
-  const handleSearchInput = (searchQuery) => {
-    setQuery(searchQuery);
-    
-    // Update URL
-    const urlParams = new URLSearchParams();
-    if (searchQuery.trim()) {
-      urlParams.set('q', searchQuery.trim());
-    }
-    if (selectedCategory !== 'all') {
-      urlParams.set('category', selectedCategory);
-    }
-    
-    const newUrl = `/search${urlParams.toString() ? '?' + urlParams.toString() : ''}`;
-    navigate(newUrl, { replace: true });
-  };
+  }, [getSearchQuery, handleSearch]);
 
   // Handle category filter
   const handleCategoryChange = (category) => {

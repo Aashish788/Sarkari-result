@@ -131,6 +131,8 @@ const SearchBox = ({
         setSelectedIndex(-1);
         inputRef.current?.blur();
         break;
+      default:
+        break;
     }
   };
 
