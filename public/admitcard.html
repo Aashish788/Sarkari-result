@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarkari Result – Admit Card Details</title>
+  <meta name="description" content="View and download admit card details on Sarkari Result." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fffe;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 28px;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #2f7d4a, #4caf70);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+    }
+    h1 { font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+    p { font-size: 15px; color: #666; line-height: 1.5; margin-bottom: 24px; }
+    .open-app-btn {
+      display: block;
+      background: linear-gradient(135deg, #2f7d4a, #4caf70);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: opacity 0.2s;
+    }
+    .open-app-btn:hover { opacity: 0.9; }
+    .playstore-btn {
+      display: block;
+      background: #f1f3f4;
+      color: #333;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .playstore-btn:hover { background: #e2e4e5; }
+    .divider { color: #ccc; margin: 8px 0; font-size: 13px; }
+    .badge { display: inline-block; background: #e8f5e9; color: #2f7d4a; border-radius: 50px; padding: 4px 12px; font-size: 12px; font-weight: 600; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🎫</div>
+    <span class="badge">Sarkari Buddy</span>
+    <h1>View Admit Card</h1>
+    <p>
+      Open the Sarkari Buddy app for the best experience —
+      get exam date reminders, download admit cards, and check exam centers.
+    </p>
+    <a class="open-app-btn" id="open-app-btn" href="#">
+      📱 Open in Sarkari Buddy App
+    </a>
+    <div class="divider">— or —</div>
+    <a class="playstore-btn"
+       href="https://play.google.com/store/apps/details?id=com.Sarkaribuddy.app"
+       id="playstore-btn">
+      ⬇️ Download from Play Store
+    </a>
+  </div>
+
+  <script>
+    const pathParts = window.location.pathname.split('/');
+    const admitCardId = pathParts[pathParts.length - 1];
+    const appDeepLink = 'sarkariresult://admitcard/' + admitCardId;
+    document.getElementById('open-app-btn').href = appDeepLink;
+
+    let appOpened = false;
+    window.addEventListener('blur', function() { appOpened = true; });
+
+    setTimeout(function() {
+      window.location.href = appDeepLink;
+    }, 500);
+
+    setTimeout(function() {
+      if (!appOpened) {
+        document.getElementById('playstore-btn').style.background = '#2f7d4a';
+        document.getElementById('playstore-btn').style.color = 'white';
+      }
+    }, 2500);
+  </script>
+</body>
+</html>

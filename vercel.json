@@ -4,6 +4,8 @@
     { "source": "/.well-known/assetlinks.json", "destination": "/.well-known/assetlinks.json" },
     { "source": "/.well-known/apple-app-site-association", "destination": "/.well-known/apple-app-site-association" },
     { "source": "/job/:id", "destination": "/job.html" },
+    { "source": "/result/:id", "destination": "/result.html" },
+    { "source": "/admitcard/:id", "destination": "/admitcard.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
